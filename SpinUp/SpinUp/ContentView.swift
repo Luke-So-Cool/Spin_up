@@ -11,11 +11,6 @@ import SpriteKit
 struct ContentView: View {
     @State var velocity: Double = 0
 
-    init() {
-        gameManager = GameManager.shared
-        gameManager?.uiDelegate = self
-    }
-    
     var body: some View {
         ZStack {
             gameView
