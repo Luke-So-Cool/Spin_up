@@ -9,46 +9,34 @@ import SwiftUI
 import SpriteKit
 
 struct ContentView: View {
-    let gameManager: GameManager?
-    
     @State var velocity: Double = 0
-    
-    
-    var scene: SKScene {
-        let scene = GameScene()
-        //게임 화면의 크기 설정
-        //화면에 꽉차게 설정
-        scene.scaleMode = .resizeFill //A setting that defines how the scene is mapped to the view that presents it.
-        scene.velocityDelegate = self
-        return scene
-    }
-    
+
     init() {
         gameManager = GameManager.shared
         gameManager?.uiDelegate = self
     }
     
     var body: some View {
-        
-        
         ZStack {
-            SpriteView(scene: scene)
+            gameView
                 .zIndex(1)
-            
             VStack {
                 Text("\(velocity)")
                     .font(.title.bold())
                     .foregroundColor(.black)
-                    
-                
                 Spacer()
             }
             .zIndex(2)
-            
-            
-            
         }
-        
+    }
+}
+
+extension ContentView {
+    var gameView: some View {
+        let scene = GameScene()
+        scene.scaleMode = .resizeFill
+        scene.velocityDelegate = self
+        return SpriteView(scene: scene)
     }
 }
 
