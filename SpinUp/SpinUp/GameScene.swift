@@ -14,21 +14,6 @@ class GameScene: SKScene { //An object that organizes all of the active SpriteKi
     let gameManager = GameManager.shared
     var velocityDelegate: ContentView?
     let testNode = SpinnerNode()
-    let afterImageNodes: [SKSpriteNode] = {
-        var nodes: [SKSpriteNode] = []
-        for i in [1, 2, 4, 8] {
-            let node = SpinnerNode()
-            node.alpha = 0.1
-            let bitMask = UInt32(i)
-            print("DEBUG: bitmask - \(bitMask)")
-            node.physicsBody?.collisionBitMask = bitMask
-            node.physicsBody?.contactTestBitMask = bitMask
-            node.physicsBody?.categoryBitMask = bitMask
-            nodes.append(node)
-            print("DEBUG: nodes count - \(nodes.count)")
-        }
-        return nodes
-    }()
 
     //MARK: - Initializer
     override init(size: CGSize) {
@@ -58,10 +43,6 @@ class GameScene: SKScene { //An object that organizes all of the active SpriteKi
         testNode.physicsBody?.categoryBitMask = 0
         self.addChild(testNode)
   
-        for node in afterImageNodes {
-            node.position = CGPoint(x: frame.midX, y: frame.midY)
-            self.addChild(node)
-        }
         let panGestureRecognizer : UIPanGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(GameScene.didSwipe))
         view.addGestureRecognizer(panGestureRecognizer)
     }
@@ -73,15 +54,6 @@ extension GameScene {
         let velocity = sender.velocity(in: self.view)
         print("DEBUG: swipe gesture x : \(velocity.x)")
         let testAnimation = SKAction.sequence([SKAction.applyAngularImpulse(velocity.x / 100000, duration: 0.1)])
-        let subAnimation = SKAction.sequence([SKAction.applyAngularImpulse(velocity.x / 100000, duration: 0.12)])
-        let subAnimation2 = SKAction.sequence([SKAction.applyAngularImpulse(velocity.x / 100000, duration: 0.18)])
-        let subAnimation3 = SKAction.sequence([SKAction.applyAngularImpulse(velocity.x / 100000, duration: 0.24)])
-        let subAnimation4 = SKAction.sequence([SKAction.applyAngularImpulse(velocity.x / 100000, duration: 0.3)])
-        
-        let afterImageEffects = [subAnimation, subAnimation2, subAnimation3, subAnimation4]
-        for i in 0...3 {
-            afterImageNodes[i].run(afterImageEffects[i])
-        }
         testNode.run(testAnimation)
     }
 }
