@@ -42,6 +42,10 @@ extension ContentView {
 }
 
 extension ContentView: UIDelegate {
+    func gameStateChanged(last: GameState, new: GameState) {
+        
+    }
+    
     func nextLevel(level: Int) {
         // 다음 레벨 핸들ㄹ
     }

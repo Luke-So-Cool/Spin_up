@@ -14,6 +14,7 @@ class GameScene: SKScene { //An object that organizes all of the active SpriteKi
     let gameManager = GameManager.shared
     var velocityDelegate: ContentView?
     let testNode = SpinnerNode()
+    
 
     //MARK: - Initializer
     override init(size: CGSize) {
@@ -41,6 +42,7 @@ class GameScene: SKScene { //An object that organizes all of the active SpriteKi
         testNode.physicsBody?.collisionBitMask = 0
         testNode.physicsBody?.contactTestBitMask = 0
         testNode.physicsBody?.categoryBitMask = 0
+        testNode.physicsBody?.friction = 1000
         self.addChild(testNode)
   
         let panGestureRecognizer : UIPanGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(GameScene.didSwipe))
@@ -51,10 +53,12 @@ class GameScene: SKScene { //An object that organizes all of the active SpriteKi
 //MARK: - Delegates
 extension GameScene {
     @objc func didSwipe(sender: UIPanGestureRecognizer) {
+        guard gameManager.state == .start else { return }
         let velocity = sender.velocity(in: self.view)
         print("DEBUG: swipe gesture x : \(velocity.x)")
-        let testAnimation = SKAction.sequence([SKAction.applyAngularImpulse(velocity.x / 100000, duration: 0.1)])
+        let testAnimation = SKAction.sequence([SKAction.applyAngularImpulse(velocity.x / 1000, duration: 0.1)])
         testNode.run(testAnimation)
+        gameManager.state = .running
     }
 }
 
