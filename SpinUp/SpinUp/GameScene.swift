@@ -35,8 +35,9 @@ class GameScene: SKScene { //An object that organizes all of the active SpriteKi
         //        velocityDelegate?.velocityChanged(velocity: Double(testNode.physicsBody!.angularVelocity))
         
         print(testNode.physicsBody?.angularVelocity)
-        if testNode.physicsBody?.angularVelocity ?? 5 < 3 && isSpinning == true && gameManager.state == .running {
-            gameManager.state = .stop
+        if testNode.physicsBody?.angularVelocity ?? 5 < 10 && isSpinning == true && gameManager.state == .running {
+            stopFidget()
+            
             
         }
     }
@@ -51,9 +52,48 @@ class GameScene: SKScene { //An object that organizes all of the active SpriteKi
         testNode.physicsBody?.categoryBitMask = 0
         testNode.physicsBody?.friction = 1000
         self.addChild(testNode)
-  
+        
         gestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(GameScene.didSwipe))
-        view.addGestureRecognizer(gestureRecognizer!)
+        enableGestureRecognizer()
+    }
+    
+    //MARK: - Helpers
+    
+    func enableGestureRecognizer() {
+        print("DEBUG: 제스쳐 활성화")
+        if let gestureRecognizer {
+            view?.addGestureRecognizer(gestureRecognizer)
+        }
+    }
+    
+    func disableGestureRecognizer() {
+        print("DEBUG: 제스쳐 비활성화")
+        if let gestureRecognizer {
+            view?.removeGestureRecognizer(gestureRecognizer)
+        }
+    }
+    
+    func stopFidget() {
+        print("DEBUG: 피젯 감속")
+        testNode.physicsBody?.angularVelocity -= 0.05
+        if testNode.physicsBody!.angularVelocity < 0.3 {
+            testNode.physicsBody?.angularVelocity = 0
+            isSpinning = false
+            print("DEBUG: 피젯 정지")
+            gameManager.state = .stop
+        }
+    }
+    
+    func spinFidget(velocity: CGPoint) {
+        if isSpinning == false {
+            let testAnimation = SKAction.sequence([SKAction.applyAngularImpulse(velocity.x / 1000, duration: 0.1)])
+            testNode.run(testAnimation)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                self.isSpinning = true
+            }
+            
+            print("DEBUG: 회전중...")
+        }
     }
 }
 
@@ -61,17 +101,11 @@ class GameScene: SKScene { //An object that organizes all of the active SpriteKi
 extension GameScene {
     @objc func didSwipe(sender: UIPanGestureRecognizer) {
         guard gameManager.state == .running else { return }
-        let velocity = sender.velocity(in: self.view)
-        print("DEBUG: swipe gesture x : \(velocity.x)")
-        let testAnimation = SKAction.sequence([SKAction.applyAngularImpulse(velocity.x / 1000, duration: 0.1)])
-        testNode.run(testAnimation)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-            self.isSpinning = true
-        }
         
-        if let gestureRecognizer {
-            view?.removeGestureRecognizer(gestureRecognizer)
-        }
+        let velocity = sender.velocity(in: self.view)
+        print("DEBUG: Swiped \(velocity.x)")
+        spinFidget(velocity: velocity)
+        disableGestureRecognizer()
     }
 }
 
