@@ -11,9 +11,10 @@ import SwiftUI
 
 class GameScene: SKScene { //An object that organizes all of the active SpriteKit content.
     //MARK: - Properties
-    let gameManager = GameManager.shared
-    var velocityDelegate: ContentView?
-    let testNode = SpinnerNode()
+    var gameManager = GameManager.shared
+    private let testNode = SpinnerNode()
+    private var gestureRecognizer: UIPanGestureRecognizer?
+    private var isSpinning: Bool = false
     
 
     //MARK: - Initializer
@@ -31,7 +32,13 @@ class GameScene: SKScene { //An object that organizes all of the active SpriteKi
     //MARK: - LifeCycle
     override func update(_ currentTime: TimeInterval) {
         physicsWorld.gravity = CGVector(dx: 0, dy: 0)
-        velocityDelegate?.velocityChanged(velocity: Double(testNode.physicsBody!.angularVelocity))
+        //        velocityDelegate?.velocityChanged(velocity: Double(testNode.physicsBody!.angularVelocity))
+        
+        print(testNode.physicsBody?.angularVelocity)
+        if testNode.physicsBody?.angularVelocity ?? 5 < 3 && isSpinning == true && gameManager.state == .running {
+            gameManager.state = .stop
+            
+        }
     }
     
     override func didMove(to view: SKView) {
@@ -45,20 +52,26 @@ class GameScene: SKScene { //An object that organizes all of the active SpriteKi
         testNode.physicsBody?.friction = 1000
         self.addChild(testNode)
   
-        let panGestureRecognizer : UIPanGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(GameScene.didSwipe))
-        view.addGestureRecognizer(panGestureRecognizer)
+        gestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(GameScene.didSwipe))
+        view.addGestureRecognizer(gestureRecognizer!)
     }
 }
 
 //MARK: - Delegates
 extension GameScene {
     @objc func didSwipe(sender: UIPanGestureRecognizer) {
-        guard gameManager.state == .start else { return }
+        guard gameManager.state == .running else { return }
         let velocity = sender.velocity(in: self.view)
         print("DEBUG: swipe gesture x : \(velocity.x)")
         let testAnimation = SKAction.sequence([SKAction.applyAngularImpulse(velocity.x / 1000, duration: 0.1)])
         testNode.run(testAnimation)
-        gameManager.state = .running
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            self.isSpinning = true
+        }
+        
+        if let gestureRecognizer {
+            view?.removeGestureRecognizer(gestureRecognizer)
+        }
     }
 }
 
