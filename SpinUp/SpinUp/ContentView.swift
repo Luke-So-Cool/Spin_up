@@ -10,17 +10,14 @@ import SpriteKit
 
 struct ContentView: View {
     @State var velocity: Double = 0
+    @StateObject var gameManager = GameManager.shared
     
-    init() {
-        GameManager.shared.uiDelegate = self
-    }
-
     var body: some View {
         ZStack {
             gameView
                 .zIndex(1)
             VStack {
-                Text("\(velocity)")
+                Text("\(gameManager.state.rawValue)")
                     .font(.title.bold())
                     .foregroundColor(.black)
                 Spacer()
@@ -34,7 +31,7 @@ extension ContentView {
     var gameView: some View {
         let scene = GameScene()
         scene.scaleMode = .resizeFill
-        scene.velocityDelegate = self
+//        scene.velocityDelegate = self
         return SpriteView(scene: scene)
     }
 }
@@ -42,12 +39,6 @@ extension ContentView {
 extension ContentView {
     func velocityChanged(velocity: Double?) {
         self.velocity = velocity!
-    }
-}
-
-extension ContentView: UIDelegate {
-    func gameStateChanged(last: GameState, new: GameState) {
-        // 게임 상태 변환 시 호출되는 메서드
     }
 }
 
