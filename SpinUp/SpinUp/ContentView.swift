@@ -10,6 +10,10 @@ import SpriteKit
 
 struct ContentView: View {
     @State var velocity: Double = 0
+    
+    init() {
+        GameManager.shared.uiDelegate = self
+    }
 
     var body: some View {
         ZStack {
@@ -43,15 +47,7 @@ extension ContentView {
 
 extension ContentView: UIDelegate {
     func gameStateChanged(last: GameState, new: GameState) {
-        
-    }
-    
-    func nextLevel(level: Int) {
-        // 다음 레벨 핸들ㄹ
-    }
-    
-    func gameOver() {
-        // 게임 오버 핸들러
+        // 게임 상태 변환 시 호출되는 메서드
     }
 }
 
