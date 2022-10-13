@@ -8,8 +8,14 @@
 import SwiftUI
 import SpriteKit
 
+
 enum ViewMode {                 // 기본 입력, 곱셈, 나누기 입력
     case main, play, result
+
+}
+
+enum viewState {
+    case home, game, result
 }
 
 struct ContentView: View {
@@ -21,7 +27,6 @@ struct ContentView: View {
         ZStack {
             gameView
                 .zIndex(1)
-            
 
             switch viewState {
             case .main:
@@ -58,6 +63,7 @@ struct ContentView: View {
                 }
                 .zIndex(2)
 
+
             }
             
         }
@@ -85,6 +91,7 @@ extension ContentView {
     }
 }
 // main mode views
+
 extension ContentView {
     @ViewBuilder
     var gameView: some View {
@@ -92,7 +99,6 @@ extension ContentView {
         scene.scaleMode = .resizeFill
 
         scene.backgroundColor = .clear
->>>>>>> Stashed changes
         return SpriteView(scene: scene)
     }
     
@@ -165,6 +171,8 @@ extension ContentView {
         self.gameManager.velocity = velocity!
     }
 }
+
+// 게임중
 
 //extension ContentView: UIDelegate {
 //    func nextLevel(level: Int) {
