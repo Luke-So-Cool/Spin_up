@@ -72,6 +72,7 @@ struct GameOverView: View {
             .overlay(
                 Capsule()
                     .stroke(lineWidth: 1)
+                    .shadow(radius: 4)
             )
             .onTapGesture {
                 resumeWithAD()
@@ -84,6 +85,7 @@ struct GameOverView: View {
                     .overlay(
                         Circle()
                             .stroke(lineWidth: 2)
+                            .shadow(radius: 4)
                     )
                     .onTapGesture {
                         goToHome()
@@ -95,6 +97,7 @@ struct GameOverView: View {
                     .overlay(
                         Circle()
                             .stroke(lineWidth: 2)
+                            .shadow(radius: 4)
                     )
                     .onTapGesture {
                         resume()
@@ -106,10 +109,12 @@ struct GameOverView: View {
                     .overlay(
                         Circle()
                             .stroke(lineWidth: 2)
+                            .shadow(radius: 4)
                     )
                     .onTapGesture {
                         goToShop()
                     }
+                    
             }
         }
         .padding(.horizontal, 20)

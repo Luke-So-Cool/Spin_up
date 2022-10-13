@@ -16,6 +16,7 @@ struct ContentView: View {
         ZStack {
             gameView
                 .zIndex(1)
+            
             VStack {
                 Text("\(gameManager.state.rawValue)")
                     .font(.title.bold())
@@ -32,7 +33,7 @@ extension ContentView {
         let scene = GameScene()
         scene.scaleMode = .resizeFill
 //        scene.velocityDelegate = self
-        return SpriteView(scene: scene)
+        return SpriteView(scene: scene, options: [.allowsTransparency])
     }
 }
 
