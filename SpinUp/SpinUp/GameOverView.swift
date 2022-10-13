@@ -10,6 +10,10 @@ import SwiftUI
 struct GameOverView: View {
     var body: some View {
         VStack(spacing: 32) {
+            
+            Spacer()
+            
+            
             VStack(spacing: 17) {
                 Text("Score")
                 
@@ -52,8 +56,81 @@ struct GameOverView: View {
                 RoundedRectangle(cornerRadius: 8)
                     .stroke(lineWidth: 1)
             )
+            
+            Spacer()
+            
+            VStack {
+                HStack {
+                    Image(systemName: "")
+                    
+                    Text("광고 보고")
+                    Text("이어하기")
+                        .font(.body.bold())
+                }
+            }
+            .padding(10)
+            .overlay(
+                Capsule()
+                    .stroke(lineWidth: 1)
+            )
+            .onTapGesture {
+                resumeWithAD()
+            }
+            
+            HStack(spacing: 24) {
+                Image(systemName: "house")
+                    .font(.largeTitle)
+                    .frame(width: 72, height: 72)
+                    .overlay(
+                        Circle()
+                            .stroke(lineWidth: 2)
+                    )
+                    .onTapGesture {
+                        goToHome()
+                    }
+                
+                Image(systemName: "play")
+                    .font(.largeTitle)
+                    .frame(width: 100, height: 100)
+                    .overlay(
+                        Circle()
+                            .stroke(lineWidth: 2)
+                    )
+                    .onTapGesture {
+                        resume()
+                    }
+                
+                Image(systemName: "cart")
+                    .font(.largeTitle)
+                    .frame(width: 72, height: 72)
+                    .overlay(
+                        Circle()
+                            .stroke(lineWidth: 2)
+                    )
+                    .onTapGesture {
+                        goToShop()
+                    }
+            }
         }
         .padding(.horizontal, 20)
+    }
+    
+    //MARK: - Helpers
+    
+    func resumeWithAD() {
+        
+    }
+    
+    func goToHome() {
+        
+    }
+    
+    func resume() {
+        
+    }
+    
+    func goToShop() {
+        
     }
 }
 
