@@ -18,7 +18,11 @@ class GameManager: NSObject {
     weak var gameScene: GameScene?
     var uiDelegate: UIDelegate?
     var lastState: GameState = .stop
+<<<<<<< Updated upstream
     var state: GameState = .stop {
+=======
+    @Published var state: GameState = .stop {
+>>>>>>> Stashed changes
         willSet {
             lastState = state
         }
@@ -51,6 +55,10 @@ class GameManager: NSObject {
         }
     }
     
+<<<<<<< Updated upstream
+=======
+    @Published var velocity: Double = 0
+>>>>>>> Stashed changes
     
     //MARK: - Initializers
     private override init() {}
