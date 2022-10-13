@@ -7,62 +7,38 @@
 
 import Foundation
 
-protocol UIDelegate {
-    func gameStateChanged(last: GameState, new: GameState)
-}
-
-class GameManager: NSObject {
+class GameManager: ObservableObject {
     
     //MARK: - Propeties
     static let shared = GameManager() // 싱글톤 객체
     weak var gameScene: GameScene?
-    var uiDelegate: UIDelegate?
     var lastState: GameState = .stop
 
-    @Published var state: GameState = .stop {
+    @Published var state: GameState = .running {
         willSet {
             lastState = state
         }
         
         didSet {
-            defer {
-                uiDelegate?.gameStateChanged(last: lastState, new: state)
-            }
-            
-            switch state {
-            case .stop:
-                print("DEBUG: 게임 정지")
-                
-            case .pause:
-                print("DEBUG: 게임 일시 정지")
-                if lastState == .running {
-                    gameScene?.isPaused = true
-                }
-            case .running:
-                print("DEBUG: 게임 실행")
-                switch lastState {
-                case .stop:
-                    print("DEBUG: 정지상태 -> 게임 실행")
-                case .pause:
-                    print("DEBUG: 일시정지 후 게임 실행")
-                case .running:
-                    print("DEBUG: 이미 실행중입니다.")
-                }
-            }
+            didStateChange(last: lastState, new: state)
         }
     }
     
 
     @Published var velocity: Double = 0
     
+
     //MARK: - Initializers
-    private override init() {}
+    private init() {}
 
     //MARK: - Methods
+    
+    func didStateChange(last: GameState, new: GameState) {
+        print("DEBUG: 게임 상태 변경 \(last) -> \(new)")
+    }
 }
 
-enum GameState {
+enum GameState: String {
     case stop
     case running
-    case pause
 }
