@@ -16,22 +16,22 @@ struct GameOverView: View {
                 
                 Spacer()
                 
-                VStack(spacing: 6) {
+                VStack(spacing: 8) {
                     Text("Score")
-                        .font(.body.bold())
+                        .font(.custom("WallPoet", size: 16))
                     
                     Text("25,072")
-                        .font(.system(size: 48, weight: .bold))
+                        .font(.custom("WallPoet", size: 48))
                 }
                 
-                VStack(spacing: 6) {
+                VStack(spacing: 8) {
                     Text("Best")
-                        .font(.body.bold())
+                        .font(.custom("WallPoet", size: 16))
                         .foregroundColor(.white)
                     
                     Text("22,725,321")
-                        .font(.system(size: 48, weight: .bold))
-                        .foregroundColor(.white)
+                        .font(.custom("WallPoet", size: 48))
+                        .foregroundColor(.spinnerLabel3)
                 }
                 
                 HStack {
