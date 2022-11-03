@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C01EA48D291360E600488C0A /* Wallpoet-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C01EA48C291360E600488C0A /* Wallpoet-Regular.ttf */; };
 		C0ECB2A828F7A7FE00194DDE /* GameOverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0ECB2A728F7A7FE00194DDE /* GameOverView.swift */; };
 		C0F907C928504308003F3759 /* SpinUpApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F907C828504308003F3759 /* SpinUpApp.swift */; };
 		C0F907CB28504308003F3759 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F907CA28504308003F3759 /* ContentView.swift */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C01EA48C291360E600488C0A /* Wallpoet-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Wallpoet-Regular.ttf"; sourceTree = "<group>"; };
 		C0ECB2A728F7A7FE00194DDE /* GameOverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverView.swift; sourceTree = "<group>"; };
 		C0F907C528504308003F3759 /* SpinUp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpinUp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0F907C828504308003F3759 /* SpinUpApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinUpApp.swift; sourceTree = "<group>"; };
@@ -40,6 +42,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C01EA48B291360CE00488C0A /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				C01EA48C291360E600488C0A /* Wallpoet-Regular.ttf */,
+			);
+			name = Fonts;
+			sourceTree = "<group>";
+		};
 		C0F907BC28504308003F3759 = {
 			isa = PBXGroup;
 			children = (
@@ -59,6 +69,7 @@
 		C0F907C728504308003F3759 /* SpinUp */ = {
 			isa = PBXGroup;
 			children = (
+				C01EA48B291360CE00488C0A /* Fonts */,
 				C0F907DA28504736003F3759 /* Nodes */,
 				C0F907C828504308003F3759 /* SpinUpApp.swift */,
 				C0F907CA28504308003F3759 /* ContentView.swift */,
@@ -145,6 +156,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C01EA48D291360E600488C0A /* Wallpoet-Regular.ttf in Resources */,
 				C0F907D028504308003F3759 /* Preview Assets.xcassets in Resources */,
 				C0F907CD28504308003F3759 /* Assets.xcassets in Resources */,
 			);
