@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C0ECB2A828F7A7FE00194DDE /* GameOverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0ECB2A728F7A7FE00194DDE /* GameOverView.swift */; };
 		C0F907C928504308003F3759 /* SpinUpApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F907C828504308003F3759 /* SpinUpApp.swift */; };
 		C0F907CB28504308003F3759 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F907CA28504308003F3759 /* ContentView.swift */; };
 		C0F907CD28504308003F3759 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C0F907CC28504308003F3759 /* Assets.xcassets */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C0ECB2A728F7A7FE00194DDE /* GameOverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverView.swift; sourceTree = "<group>"; };
 		C0F907C528504308003F3759 /* SpinUp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpinUp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0F907C828504308003F3759 /* SpinUpApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinUpApp.swift; sourceTree = "<group>"; };
 		C0F907CA28504308003F3759 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -62,6 +64,7 @@
 				C0F907CA28504308003F3759 /* ContentView.swift */,
 				C0F907D828504484003F3759 /* GameManager.swift */,
 				C0F907D62850447C003F3759 /* GameScene.swift */,
+				C0ECB2A728F7A7FE00194DDE /* GameOverView.swift */,
 				C0F907CC28504308003F3759 /* Assets.xcassets */,
 				C0F907CE28504308003F3759 /* Preview Content */,
 			);
@@ -158,6 +161,7 @@
 				C0F907D928504484003F3759 /* GameManager.swift in Sources */,
 				C0F907DC28504742003F3759 /* SpinnerNode.swift in Sources */,
 				C0F907CB28504308003F3759 /* ContentView.swift in Sources */,
+				C0ECB2A828F7A7FE00194DDE /* GameOverView.swift in Sources */,
 				C0F907C928504308003F3759 /* SpinUpApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

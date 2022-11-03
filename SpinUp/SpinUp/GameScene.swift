@@ -11,24 +11,11 @@ import SwiftUI
 
 class GameScene: SKScene { //An object that organizes all of the active SpriteKit content.
     //MARK: - Properties
-    let gameManager = GameManager.shared
-    var velocityDelegate: ContentView?
-    let testNode = SpinnerNode()
-    let afterImageNodes: [SKSpriteNode] = {
-        var nodes: [SKSpriteNode] = []
-        for i in [1, 2, 4, 8] {
-            let node = SpinnerNode()
-            node.alpha = 0.1
-            let bitMask = UInt32(i)
-            print("DEBUG: bitmask - \(bitMask)")
-            node.physicsBody?.collisionBitMask = bitMask
-            node.physicsBody?.contactTestBitMask = bitMask
-            node.physicsBody?.categoryBitMask = bitMask
-            nodes.append(node)
-            print("DEBUG: nodes count - \(nodes.count)")
-        }
-        return nodes
-    }()
+    var gameManager = GameManager.shared
+    private let testNode = SpinnerNode()
+    private var gestureRecognizer: UIPanGestureRecognizer?
+    private var isSpinning: Bool = false
+    
 
     //MARK: - Initializer
     override init(size: CGSize) {
@@ -45,44 +32,80 @@ class GameScene: SKScene { //An object that organizes all of the active SpriteKi
     //MARK: - LifeCycle
     override func update(_ currentTime: TimeInterval) {
         physicsWorld.gravity = CGVector(dx: 0, dy: 0)
-        velocityDelegate?.velocityChanged(velocity: Double(testNode.physicsBody!.angularVelocity))
+        //        velocityDelegate?.velocityChanged(velocity: Double(testNode.physicsBody!.angularVelocity))
+        
+        print(testNode.physicsBody?.angularVelocity)
+        if testNode.physicsBody?.angularVelocity ?? 5 < 10 && isSpinning == true && gameManager.state == .running {
+            stopFidget()
+            
+            
+        }
     }
     
     override func didMove(to view: SKView) {
         physicsBody = SKPhysicsBody(edgeLoopFrom: frame.inset(by: UIEdgeInsets(top: 0, left: 0, bottom: -100, right: 0)))
         physicsWorld.contactDelegate = self
-        backgroundColor = .white
+        backgroundColor = .clear
         testNode.position = CGPoint(x: frame.midX, y: frame.midY)
         testNode.physicsBody?.collisionBitMask = 0
         testNode.physicsBody?.contactTestBitMask = 0
         testNode.physicsBody?.categoryBitMask = 0
+        testNode.physicsBody?.friction = 1000
         self.addChild(testNode)
-  
-        for node in afterImageNodes {
-            node.position = CGPoint(x: frame.midX, y: frame.midY)
-            self.addChild(node)
+        
+        gestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(GameScene.didSwipe))
+        enableGestureRecognizer()
+    }
+    
+    //MARK: - Helpers
+    
+    func enableGestureRecognizer() {
+        print("DEBUG: 제스쳐 활성화")
+        if let gestureRecognizer {
+            view?.addGestureRecognizer(gestureRecognizer)
         }
-        let panGestureRecognizer : UIPanGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(GameScene.didSwipe))
-        view.addGestureRecognizer(panGestureRecognizer)
+    }
+    
+    func disableGestureRecognizer() {
+        print("DEBUG: 제스쳐 비활성화")
+        if let gestureRecognizer {
+            view?.removeGestureRecognizer(gestureRecognizer)
+        }
+    }
+    
+    func stopFidget() {
+        print("DEBUG: 피젯 감속")
+        testNode.physicsBody?.angularVelocity -= 0.05
+        if testNode.physicsBody!.angularVelocity < 0.3 {
+            testNode.physicsBody?.angularVelocity = 0
+            isSpinning = false
+            print("DEBUG: 피젯 정지")
+            gameManager.state = .stop
+        }
+    }
+    
+    func spinFidget(velocity: CGPoint) {
+        if isSpinning == false {
+            let testAnimation = SKAction.sequence([SKAction.applyAngularImpulse(velocity.x / 1000, duration: 0.1)])
+            testNode.run(testAnimation)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                self.isSpinning = true
+            }
+            
+            print("DEBUG: 회전중...")
+        }
     }
 }
 
 //MARK: - Delegates
 extension GameScene {
     @objc func didSwipe(sender: UIPanGestureRecognizer) {
-        let velocity = sender.velocity(in: self.view)
-        print("DEBUG: swipe gesture x : \(velocity.x)")
-        let testAnimation = SKAction.sequence([SKAction.applyAngularImpulse(velocity.x / 100000, duration: 0.1)])
-        let subAnimation = SKAction.sequence([SKAction.applyAngularImpulse(velocity.x / 100000, duration: 0.12)])
-        let subAnimation2 = SKAction.sequence([SKAction.applyAngularImpulse(velocity.x / 100000, duration: 0.18)])
-        let subAnimation3 = SKAction.sequence([SKAction.applyAngularImpulse(velocity.x / 100000, duration: 0.24)])
-        let subAnimation4 = SKAction.sequence([SKAction.applyAngularImpulse(velocity.x / 100000, duration: 0.3)])
+        guard gameManager.state == .running else { return }
         
-        let afterImageEffects = [subAnimation, subAnimation2, subAnimation3, subAnimation4]
-        for i in 0...3 {
-            afterImageNodes[i].run(afterImageEffects[i])
-        }
-        testNode.run(testAnimation)
+        let velocity = sender.velocity(in: self.view)
+        print("DEBUG: Swiped \(velocity.x)")
+        spinFidget(velocity: velocity)
+        disableGestureRecognizer()
     }
 }
 
