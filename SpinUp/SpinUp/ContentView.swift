@@ -24,7 +24,6 @@ struct ContentView: View {
         ZStack {
             gameView
                 .zIndex(1)
-
             switch viewState {
             case .main:
                 VStack(spacing: 0) {
@@ -91,8 +90,10 @@ extension ContentView {
         let scene = GameScene()
         scene.scaleMode = .resizeFill
 
-        scene.backgroundColor = .clear
-        return SpriteView(scene: scene)
+        // scene.backgroundColor = .clear
+        // return SpriteView(scene: scene)
+
+        return SpriteView(scene: scene, options: [.allowsTransparency])
     }
     
     var navigationBarView: some View {
