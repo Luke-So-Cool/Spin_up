@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct GameOverView: View {
+    @StateObject var vm = GameOverViewModel()
+    
     var body: some View {
         ZStack {
             Color.background.opacity(0.95)
@@ -20,7 +22,7 @@ struct GameOverView: View {
                     Text("Score")
                         .font(.custom("WallPoet", size: 16))
                     
-                    Text("25,072")
+                    Text("\(vm.score)")
                         .font(.custom("WallPoet", size: 48))
                 }
                 
@@ -29,7 +31,7 @@ struct GameOverView: View {
                         .font(.custom("WallPoet", size: 16))
                         .foregroundColor(.white)
                     
-                    Text("22,725,321")
+                    Text("\(vm.bestScore)")
                         .font(.custom("WallPoet", size: 48))
                         .foregroundColor(.spinnerLabel3)
                 }
@@ -40,7 +42,7 @@ struct GameOverView: View {
                             .font(.caption)
                             .foregroundColor(.spinnerLabel3)
                         
-                        Text("26 sec")
+                        Text("\(vm.time) sec")
                             .font(.body.bold())
                             
                     }
@@ -55,7 +57,7 @@ struct GameOverView: View {
                             .font(.caption)
                             .foregroundColor(.spinnerLabel3)
                         
-                        Text("153mph")
+                        Text("\(vm.highSpeed)mph")
                             .font(.body.bold())
                     }
                 }
