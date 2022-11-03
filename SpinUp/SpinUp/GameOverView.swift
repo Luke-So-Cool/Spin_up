@@ -72,9 +72,9 @@ struct GameOverView: View {
                 ZStack {
                     
                     Capsule()
-                        .stroke(lineWidth: 1)
+                        .stroke(lineWidth: 2)
                         .frame(height: 44)
-                        .shadow(color: Color("SpinnerAd"), radius: 4)
+                        .shadow(color: Color("SpinnerAd"), radius: 6)
                         .padding(.horizontal, 60)
                         
                     
@@ -103,7 +103,8 @@ struct GameOverView: View {
                     ZStack {
                         Circle()
                             .stroke(lineWidth: 2)
-                            .shadow(color: .spinnerLabel ,radius: 4)
+                            .shadow(color: .spinnerLabel ,radius: 6)
+                            
                             
                         Image(systemName: "house")
                             .font(.largeTitle)
@@ -117,7 +118,7 @@ struct GameOverView: View {
                     ZStack {
                         Circle()
                             .stroke(lineWidth: 2)
-                            .shadow(color: .spinnerLabel ,radius: 4)
+                            .shadow(color: .spinnerLabel ,radius: 6)
                         
                         Image(systemName: "play")
                             .font(.largeTitle)
@@ -130,7 +131,7 @@ struct GameOverView: View {
                     ZStack {
                         Circle()
                             .stroke(lineWidth: 2)
-                            .shadow(color: .spinnerLabel ,radius: 4)
+                            .shadow(color: .spinnerLabel ,radius: 6)
                         
                         Image(systemName: "cart")
                             .font(.largeTitle)
