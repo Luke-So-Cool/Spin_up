@@ -11,7 +11,6 @@ import SpriteKit
 
 enum ViewMode {
     case main, play, result
-
 }
 
 //MARK: - ContentView
@@ -42,17 +41,16 @@ struct ContentView: View {
                 
             case .play:
                 
-                VStack(spacing: 0) {
+                VStack(alignment: .leading ,spacing: 0) {
                     playScoreView
                     playSpeedView
                     Spacer()
                 }
+                .padding(.horizontal, 24)
                 .zIndex(2)
-
-                
             case .result:
                 VStack(spacing: 0) {
-                    
+                    // TODO: 루크의 게임 오버뷰 연결하기.
                     Text("\(gameManager.state.rawValue)")
                         .font(.title.bold())
                         .foregroundColor(.black)
@@ -69,17 +67,29 @@ extension ContentView {
     var playScoreView: some View {
         HStack {
             Text("SCORE")
+                .fontWeight(.thin)
+                .foregroundColor(.spinnerLabel3)
             Text("345023")
+                .fontWeight(.bold)
+                .foregroundColor(.white)
+            Spacer()
         }
     }
     var playSpeedView: some View {
         HStack(alignment: .lastTextBaseline) {
             ZStack(alignment: .trailing) {
                 Text("000")
+                    .foregroundColor(.spinnerSecondary)
+                    .font(.system(size: 96))
                 // 색을 연하게하고, 그걸 0을 추가하기
                 Text("000")
+                    .foregroundColor(.spinnerAccent)
+                    .font(.system(size: 96))
+
             }
             Text("RPM")
+                .foregroundColor(.spinnerAccent)
+
         }
     }
 }
