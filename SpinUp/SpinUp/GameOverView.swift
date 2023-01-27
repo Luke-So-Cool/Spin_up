@@ -38,70 +38,70 @@ struct GameOverView: View {
                         .foregroundColor(.spinnerLabel3)
                 }
                 
-                HStack {
-                    VStack(spacing: 2) {
-                        Text("TIME")
-                            .font(.caption)
-                            .foregroundColor(.spinnerLabel3)
-                        
-                        Text("\(vm.time) sec")
-                            .font(.body.bold())
-                            
-                    }
-                    
-                    Divider()
-                        .background(.white)
-                        .frame(width: 20)
-                        .padding(10)
-                    
-                    VStack(spacing: 2) {
-                        Text("HIGH SPEED")
-                            .font(.caption)
-                            .foregroundColor(.spinnerLabel3)
-                        
-                        Text("\(vm.highSpeed)mph")
-                            .font(.body.bold())
-                    }
-                }
-                .padding(.horizontal, 44)
-                .frame(height: 75)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 8)
-                        .stroke(lineWidth: 1)
-                        .foregroundColor(.spinnerLabel2)
-                )
+//                HStack {
+//                    VStack(spacing: 2) {
+//                        Text("TIME")
+//                            .font(.caption)
+//                            .foregroundColor(.spinnerLabel3)
+//
+//                        Text("\(vm.time) sec")
+//                            .font(.body.bold())
+//
+//                    }
+//
+//                    Divider()
+//                        .background(.white)
+//                        .frame(width: 20)
+//                        .padding(10)
+//
+//                    VStack(spacing: 2) {
+//                        Text("HIGH SPEED")
+//                            .font(.caption)
+//                            .foregroundColor(.spinnerLabel3)
+//
+//                        Text("\(vm.highSpeed)mph")
+//                            .font(.body.bold())
+//                    }
+//                }
+//                .padding(.horizontal, 44)
+//                .frame(height: 75)
+//                .overlay(
+//                    RoundedRectangle(cornerRadius: 8)
+//                        .stroke(lineWidth: 1)
+//                        .foregroundColor(.spinnerLabel2)
+//                )
                 
                 Spacer()
                 
-                ZStack {
-                    
-                    Capsule()
-                        .stroke(lineWidth: 2)
-                        .frame(height: 44)
-                        .shadow(color: Color("SpinnerAd"), radius: 6)
-                        .padding(.horizontal, 60)
-                        
-                    
-                    VStack {
-                        HStack {
-                            
-                            Image(systemName: "film")
-                                .font(.subheadline.bold())
-                            
-                            Text("광고 보고")
-                                .font(.subheadline.bold())
-                            Text("이어하기")
-                                .font(.subheadline.bold())
-                            
-                        }
-                        .padding(.horizontal, 10)
-                    }
-                    .padding(10)
-                }
-                .foregroundColor(Color("SpinnerAd"))
-                .onTapGesture {
-                    resumeWithAD()
-                }
+//                ZStack {
+//                    
+//                    Capsule()
+//                        .stroke(lineWidth: 2)
+//                        .frame(height: 44)
+//                        .shadow(color: Color("SpinnerAd"), radius: 6)
+//                        .padding(.horizontal, 60)
+//                        
+//                    
+//                    VStack {
+//                        HStack {
+//                            
+//                            Image(systemName: "film")
+//                                .font(.subheadline.bold())
+//                            
+//                            Text("광고 보고")
+//                                .font(.subheadline.bold())
+//                            Text("이어하기")
+//                                .font(.subheadline.bold())
+//                            
+//                        }
+//                        .padding(.horizontal, 10)
+//                    }
+//                    .padding(10)
+//                }
+//                .foregroundColor(Color("SpinnerAd"))
+//                .onTapGesture {
+//                    resumeWithAD()
+//                }
                 
                 HStack(spacing: 24) {
                     ZStack {

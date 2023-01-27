@@ -78,7 +78,6 @@ class GameScene: SKScene { //An object that organizes all of the active SpriteKi
     }
     
     func decelerateFidget() {
-        
         testNode.physicsBody?.angularVelocity -= gameManager.currentSpinner.decelerationRatio
         if testNode.physicsBody!.angularVelocity < 0.5 && testNode.physicsBody!.angularVelocity >= 0.2 {
             testNode.physicsBody?.angularVelocity -= (gameManager.currentSpinner.decelerationRatio * 3)
