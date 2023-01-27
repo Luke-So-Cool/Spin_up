@@ -7,10 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2D0193BD291355E00063B21B /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D0193BC291355E00063B21B /* Color+.swift */; };
 		C01EA48D291360E600488C0A /* Wallpoet-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C01EA48C291360E600488C0A /* Wallpoet-Regular.ttf */; };
 		C01EA490291363F300488C0A /* GameOverViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01EA48F291363F300488C0A /* GameOverViewModel.swift */; };
+		C031BCF329838694008FCC02 /* ShopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C031BCF229838694008FCC02 /* ShopView.swift */; };
+		C031BCF629838BA4008FCC02 /* PagingView in Frameworks */ = {isa = PBXBuildFile; productRef = C031BCF529838BA4008FCC02 /* PagingView */; };
 		C0ECB2A828F7A7FE00194DDE /* GameOverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0ECB2A728F7A7FE00194DDE /* GameOverView.swift */; };
-		2D0193BD291355E00063B21B /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D0193BC291355E00063B21B /* Color+.swift */; };
 		C0F907C928504308003F3759 /* SpinUpApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F907C828504308003F3759 /* SpinUpApp.swift */; };
 		C0F907CB28504308003F3759 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F907CA28504308003F3759 /* ContentView.swift */; };
 		C0F907CD28504308003F3759 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C0F907CC28504308003F3759 /* Assets.xcassets */; };
@@ -21,11 +23,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2D0193BC291355E00063B21B /* Color+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+.swift"; sourceTree = "<group>"; };
 		C01EA48C291360E600488C0A /* Wallpoet-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Wallpoet-Regular.ttf"; sourceTree = "<group>"; };
 		C01EA48E2913614C00488C0A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		C01EA48F291363F300488C0A /* GameOverViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverViewModel.swift; sourceTree = "<group>"; };
+		C031BCF229838694008FCC02 /* ShopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopView.swift; sourceTree = "<group>"; };
 		C0ECB2A728F7A7FE00194DDE /* GameOverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverView.swift; sourceTree = "<group>"; };
-		2D0193BC291355E00063B21B /* Color+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+.swift"; sourceTree = "<group>"; };
 		C0F907C528504308003F3759 /* SpinUp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpinUp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0F907C828504308003F3759 /* SpinUpApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinUpApp.swift; sourceTree = "<group>"; };
 		C0F907CA28504308003F3759 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -41,6 +44,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C031BCF629838BA4008FCC02 /* PagingView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -84,6 +88,7 @@
 				C0F907D62850447C003F3759 /* GameScene.swift */,
 				C0ECB2A728F7A7FE00194DDE /* GameOverView.swift */,
 				C01EA48F291363F300488C0A /* GameOverViewModel.swift */,
+				C031BCF229838694008FCC02 /* ShopView.swift */,
 				C0F907CC28504308003F3759 /* Assets.xcassets */,
 				C0F907CE28504308003F3759 /* Preview Content */,
 			);
@@ -122,6 +127,9 @@
 			dependencies = (
 			);
 			name = SpinUp;
+			packageProductDependencies = (
+				C031BCF529838BA4008FCC02 /* PagingView */,
+			);
 			productName = SpinUp;
 			productReference = C0F907C528504308003F3759 /* SpinUp.app */;
 			productType = "com.apple.product-type.application";
@@ -150,6 +158,9 @@
 				Base,
 			);
 			mainGroup = C0F907BC28504308003F3759;
+			packageReferences = (
+				C031BCF429838BA4008FCC02 /* XCRemoteSwiftPackageReference "PagingView" */,
+			);
 			productRefGroup = C0F907C628504308003F3759 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -180,6 +191,7 @@
 				C0F907D72850447C003F3759 /* GameScene.swift in Sources */,
 				2D0193BD291355E00063B21B /* Color+.swift in Sources */,
 				C0F907D928504484003F3759 /* GameManager.swift in Sources */,
+				C031BCF329838694008FCC02 /* ShopView.swift in Sources */,
 				C0F907DC28504742003F3759 /* SpinnerNode.swift in Sources */,
 				C0F907CB28504308003F3759 /* ContentView.swift in Sources */,
 				C01EA490291363F300488C0A /* GameOverViewModel.swift in Sources */,
@@ -387,6 +399,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C031BCF429838BA4008FCC02 /* XCRemoteSwiftPackageReference "PagingView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ericlewis/PagingView.git";
+			requirement = {
+				kind = exactVersion;
+				version = 0.1.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C031BCF529838BA4008FCC02 /* PagingView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C031BCF429838BA4008FCC02 /* XCRemoteSwiftPackageReference "PagingView" */;
+			productName = PagingView;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = C0F907BD28504308003F3759 /* Project object */;
 }

@@ -37,8 +37,6 @@ class GameScene: SKScene { //An object that organizes all of the active SpriteKi
         print(testNode.physicsBody?.angularVelocity)
         if testNode.physicsBody?.angularVelocity ?? 5 < 10 && isSpinning == true && gameManager.state == .running {
             stopFidget()
-            
-            
         }
     }
     
