@@ -10,13 +10,15 @@ import PagingView
 
 
 struct ShopView: View {
+    @Binding var isPresented: Bool
+    
     let gameManager = GameManager.shared
     @StateObject var vm = ShopViewModel()
     let itemWidth: CGFloat = 180
     let itemPadding: CGFloat = 60
     
     @State var speed: CGFloat = 0.4
-    @State var currentSpinner = Spinner(id: 0)
+    @State var currentSpinner = GameManager.shared.currentSpinner
     
     var spinners: [Spinner] = [
         Spinner(id: 0),
@@ -101,6 +103,7 @@ struct ShopView: View {
                 .onTapGesture {
                     gameManager.currentSpinner.id = vm.activePageIndex
                     print("DEBUG: - 스피너 변경요청 ID- \(vm.activePageIndex)")
+                    isPresented = false
                 }
                 
                 Spacer()
@@ -259,6 +262,6 @@ struct AdaptivePagingScrollView: View {
 
 struct ShopView_Previews: PreviewProvider {
     static var previews: some View {
-        ShopView()
+        ShopView(isPresented: .constant(true))
     }
 }

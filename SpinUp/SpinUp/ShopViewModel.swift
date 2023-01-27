@@ -11,7 +11,7 @@ import SwiftUI
 class ShopViewModel: ObservableObject {
     @State var gameManager = GameManager.shared
     
-    @Published var activePageIndex: Int = 0
+    @Published var activePageIndex: Int = GameManager.shared.currentSpinner.id
     @Published var speed: CGFloat = 0 
     @Published var power: CGFloat = 0
     @Published var mass: CGFloat = 0

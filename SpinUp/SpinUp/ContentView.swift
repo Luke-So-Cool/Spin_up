@@ -61,8 +61,8 @@ struct ContentView: View {
             }
         }
         .fullScreenCover(isPresented: $vm.isShowingShopView) {
-            ShopView()
-               }
+            ShopView(isPresented: $vm.isShowingShopView)
+        }
     }
 }
 //MARK: - main mode views
