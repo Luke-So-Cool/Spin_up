@@ -173,6 +173,6 @@ struct GameOverView: View {
     }
     
     func goToShop() {
-        ShopView(isPresented: $contentViewModel.$isShowingShopView)
+        
     }
 }
