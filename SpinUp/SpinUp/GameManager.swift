@@ -24,8 +24,13 @@ class GameManager: ObservableObject {
         }
     }
     
+    @Published var currentScore: Int = 0
     @Published var currentSpinner: Spinner = Spinner(id: 0)
-    @Published var velocity: Double = 0
+    @Published var velocity: Double = 0 {
+        didSet {
+            print("속도가 으아아 \(velocity)")
+        }
+    }
     
 
     //MARK: - Initializers

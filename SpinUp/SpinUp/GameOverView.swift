@@ -22,7 +22,7 @@ struct GameOverView: View {
                     Text("Score")
                         .font(.custom("WallPoet", size: 16))
                     
-                    Text("\(vm.score)")
+                    Text("\(GameManager.shared.currentScore)")
                         .font(.custom("WallPoet", size: 48))
                 }
                 

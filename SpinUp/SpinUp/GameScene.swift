@@ -34,13 +34,14 @@ class GameScene: SKScene { //An object that organizes all of the active SpriteKi
     override func update(_ currentTime: TimeInterval) {
         physicsWorld.gravity = CGVector(dx: 0, dy: 0)
         //        velocityDelegate?.velocityChanged(velocity: Double(testNode.physicsBody!.angularVelocity))
-        
+        gameManager.velocity = (testNode.physicsBody?.angularVelocity ?? 0) * 5
+        gameManager.currentScore += Int(gameManager.velocity / 100)
 
         if gameManager.currentSpinner.id != spinnerID {
             changeFidget(id: gameManager.currentSpinner.id)
         }
         if testNode.physicsBody?.angularVelocity ?? 5 < 10 && isSpinning == true && gameManager.state == .running {
-            stopFidget()
+            decelerateFidget()
         }
     }
     
@@ -49,6 +50,7 @@ class GameScene: SKScene { //An object that organizes all of the active SpriteKi
         physicsWorld.contactDelegate = self
 //        backgroundColor = .red
         testNode.position = CGPoint(x: frame.midX, y: frame.midY)
+        testNode.texture = SKTexture(imageNamed: "SPN\(gameManager.currentSpinner.id)")
         testNode.physicsBody?.collisionBitMask = 0
         testNode.physicsBody?.contactTestBitMask = 0
         testNode.physicsBody?.categoryBitMask = 0
@@ -76,8 +78,11 @@ class GameScene: SKScene { //An object that organizes all of the active SpriteKi
     }
     
     func decelerateFidget() {
+        
         testNode.physicsBody?.angularVelocity -= gameManager.currentSpinner.decelerationRatio
-        if testNode.physicsBody!.angularVelocity < 0.3 {
+        if testNode.physicsBody!.angularVelocity < 0.5 && testNode.physicsBody!.angularVelocity >= 0.2 {
+            testNode.physicsBody?.angularVelocity -= (gameManager.currentSpinner.decelerationRatio * 3)
+        } else if testNode.physicsBody!.angularVelocity < 0.2 {
             stopFidget()
         }
     }

@@ -13,6 +13,7 @@ import SpriteKit
 //MARK: - ContentView
 struct ContentView: View {
     @StateObject private var vm = ContentViewModel()
+    @StateObject var gameManager = GameManager.shared
     
     var body: some View {
         ZStack {
@@ -148,7 +149,7 @@ extension ContentView {
             Text("SCORE")
                 .fontWeight(.thin)
                 .foregroundColor(.spinnerLabel3)
-            Text("345023")
+            Text("\(gameManager.currentScore)")
                 .fontWeight(.bold)
                 .foregroundColor(.spinnerLabel)
             Spacer()
@@ -157,12 +158,12 @@ extension ContentView {
     var playSpeedView: some View {
         HStack(alignment: .lastTextBaseline) {
             ZStack(alignment: .trailing) {
-                Text("000")
-                    .font(.custom("WallPoet", size: 96))
-                    .foregroundColor(.spinnerSecondary)
-                    .multilineTextAlignment(.trailing)
+//                Text("000")
+//                    .font(.custom("WallPoet", size: 96))
+//                    .foregroundColor(.spinnerSecondary)
+//                    .multilineTextAlignment(.trailing)
 
-                Text("0")
+                Text("\(Int(gameManager.velocity))")
                     .font(.custom("WallPoet", size: 96))
                     .foregroundColor(.spinnerAccent)
                     .multilineTextAlignment(.trailing)
