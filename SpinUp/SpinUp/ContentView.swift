@@ -62,39 +62,6 @@ struct ContentView: View {
         }
     }
 }
-
-//MARK: - play mode views
-extension ContentView {
-    var playScoreView: some View {
-        HStack {
-            Text("SCORE")
-                .fontWeight(.thin)
-                .foregroundColor(.spinnerLabel3)
-            Text("345023")
-                .fontWeight(.bold)
-                .foregroundColor(.white)
-            Spacer()
-        }
-    }
-    var playSpeedView: some View {
-        HStack(alignment: .lastTextBaseline) {
-            ZStack(alignment: .trailing) {
-                Text("000")
-                    .foregroundColor(.spinnerSecondary)
-                    .font(.system(size: 96))
-                // 색을 연하게하고, 그걸 0을 추가하기
-                Text("000")
-                    .foregroundColor(.spinnerAccent)
-                    .font(.system(size: 96))
-
-            }
-            Text("RPM")
-                .foregroundColor(.spinnerAccent)
-
-        }
-    }
-}
-
 //MARK: - main mode views
 extension ContentView {
 
@@ -173,6 +140,39 @@ extension ContentView {
         }
     }
 }
+
+//MARK: - play mode views
+extension ContentView {
+    var playScoreView: some View {
+        HStack {
+            Text("SCORE")
+                .fontWeight(.thin)
+                .foregroundColor(.spinnerLabel3)
+            Text("345023")
+                .fontWeight(.bold)
+                .foregroundColor(.white)
+            Spacer()
+        }
+    }
+    var playSpeedView: some View {
+        HStack(alignment: .lastTextBaseline) {
+            ZStack(alignment: .trailing) {
+                Text("000")
+                    .foregroundColor(.spinnerSecondary)
+                    .font(.system(size: 96))
+                // 색을 연하게하고, 그걸 0을 추가하기
+                Text("000")
+                    .foregroundColor(.spinnerAccent)
+                    .font(.system(size: 96))
+
+            }
+            Text("RPM")
+                .foregroundColor(.spinnerAccent)
+
+        }
+    }
+}
+
 
 extension ContentView {
     func velocityChanged(velocity: Double?) {
