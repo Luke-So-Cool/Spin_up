@@ -68,8 +68,6 @@ extension ContentView {
     var gameView: some View {
         let scene = GameScene()
         scene.scaleMode = .resizeFill
-
-        scene.backgroundColor = .clear
         return SpriteView(scene: scene)
     }
     
@@ -135,7 +133,7 @@ extension ContentView {
                 .overlay(
                     Capsule()
                         .stroke(Color.spinnerAccent, lineWidth: 1)
-                        .shadow(color: Color.spinnerAccent, radius: 10)
+                        .shadow(color: Color.spinnerAccent, radius: 20)
                 )
         }
     }
@@ -150,7 +148,7 @@ extension ContentView {
                 .foregroundColor(.spinnerLabel3)
             Text("345023")
                 .fontWeight(.bold)
-                .foregroundColor(.white)
+                .foregroundColor(.spinnerLabel)
             Spacer()
         }
     }
@@ -158,15 +156,19 @@ extension ContentView {
         HStack(alignment: .lastTextBaseline) {
             ZStack(alignment: .trailing) {
                 Text("000")
+                    .font(.custom("WallPoet", size: 96))
                     .foregroundColor(.spinnerSecondary)
-                    .font(.system(size: 96))
-                // 색을 연하게하고, 그걸 0을 추가하기
-                Text("000")
+                    .multilineTextAlignment(.trailing)
+
+                Text("0")
+                    .font(.custom("WallPoet", size: 96))
                     .foregroundColor(.spinnerAccent)
-                    .font(.system(size: 96))
+                    .multilineTextAlignment(.trailing)
+
 
             }
             Text("RPM")
+                .font(.custom("WallPoet", size: 17, relativeTo: .body))
                 .foregroundColor(.spinnerAccent)
 
         }
