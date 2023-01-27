@@ -25,7 +25,7 @@ struct ShopView: View {
     var body: some View {
         
         ZStack {
-            Color.background
+            Color.backgroundBlack
             
             VStack {
                 Spacer()
