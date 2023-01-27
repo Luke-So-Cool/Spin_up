@@ -26,12 +26,7 @@ class GameManager: ObservableObject {
     
     @Published var currentScore: Int = 0
     @Published var currentSpinner: Spinner = Spinner(id: 0)
-    @Published var velocity: Double = 0 {
-        didSet {
-            print("속도가 으아아 \(velocity)")
-        }
-    }
-    
+    @Published var velocity: Double = 0
 
     //MARK: - Initializers
     private init() {}
@@ -43,8 +38,16 @@ class GameManager: ObservableObject {
         //여기서 실행되어야하는게, 뷰상태 변경해야하네!
     }
     
-    func startGame() { state = .running }
+    func startGame() {
+        reset()
+        state = .running
+    }
+    
     func stopGame() { state = .stop }
+    
+    func reset() {
+        currentScore = 0
+    }
 }
 
 enum GameState: String {

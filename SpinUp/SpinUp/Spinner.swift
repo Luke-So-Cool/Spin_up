@@ -51,7 +51,7 @@ struct Spinner: Identifiable {
         case 3:
             return 0.8
         default:
-            return 5
+            return 0.2
         }
     }
     
@@ -77,13 +77,13 @@ struct Spinner: Identifiable {
     var decelerationRatio: CGFloat {
         switch id {
         case 0:
-            return 0.10
+            return 0.20
         case 1:
-            return 0.08
+            return 0.16
         case 2:
-            return 0.05
-        case 3:
             return 0.06
+        case 3:
+            return 0.10
         default:
             return 0.10
         }

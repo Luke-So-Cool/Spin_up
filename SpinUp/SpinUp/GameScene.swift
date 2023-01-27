@@ -35,7 +35,7 @@ class GameScene: SKScene { //An object that organizes all of the active SpriteKi
         physicsWorld.gravity = CGVector(dx: 0, dy: 0)
         //        velocityDelegate?.velocityChanged(velocity: Double(testNode.physicsBody!.angularVelocity))
         gameManager.velocity = (testNode.physicsBody?.angularVelocity ?? 0) * 5
-        gameManager.currentScore += Int(gameManager.velocity / 100)
+        gameManager.currentScore += Int(gameManager.velocity / 20)
 
         if gameManager.currentSpinner.id != spinnerID {
             changeFidget(id: gameManager.currentSpinner.id)
@@ -97,7 +97,10 @@ class GameScene: SKScene { //An object that organizes all of the active SpriteKi
     func spinFidget(velocity: CGPoint) {
         if isSpinning == false {
             let power = gameManager.currentSpinner.power
-            let testAnimation = SKAction.sequence([SKAction.applyAngularImpulse(velocity.x / ( 1000 * power ), duration: 0.1)])
+            print("스피너 파워 : \(power)")
+            let angularImpurse = (velocity.x / 1000) * (power * 10)
+            print("방금 충격량 : \(angularImpurse)")
+            let testAnimation = SKAction.sequence([SKAction.applyAngularImpulse(angularImpurse , duration: 0.1)])
             testNode.run(testAnimation)
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                 self.isSpinning = true
@@ -122,7 +125,7 @@ extension GameScene {
         let velocity = sender.velocity(in: self.view)
         print("DEBUG: Swiped \(velocity.x)")
         spinFidget(velocity: velocity)
-        disableGestureRecognizer()
+//        disableGestureRecognizer()
     }
 }
 

@@ -168,10 +168,11 @@ struct GameOverView: View {
     }
     
     func resume() {
-        
+        contentViewModel.viewState = .play
+        GameManager.shared.startGame()
     }
     
     func goToShop() {
-        
+        ShopView(isPresented: $contentViewModel.$isShowingShopView)
     }
 }
