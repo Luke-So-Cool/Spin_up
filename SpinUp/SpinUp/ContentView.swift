@@ -9,23 +9,19 @@ import SwiftUI
 import SpriteKit
 
 
-enum ViewMode {
-    case main, play, result
-}
 
 //MARK: - ContentView
 struct ContentView: View {
     @StateObject var vm = ContentViewModel()
 
     @StateObject var gameManager = GameManager.shared
-    @State var viewState: ViewMode = .main
     
     var body: some View {
         ZStack {
             gameView
                 .zIndex(1)
 
-            switch viewState {
+            switch vm.viewState {
             case .main:
                 VStack(spacing: 0) {
                     navigationBarView
@@ -122,7 +118,7 @@ extension ContentView {
     var spinButton: some View {
         Button {
             GameManager.shared.state = .running
-            viewState = .play
+            vm.viewState = .play
         } label: {
             
             Text("SPIN")

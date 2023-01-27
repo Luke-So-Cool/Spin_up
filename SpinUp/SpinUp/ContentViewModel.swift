@@ -10,5 +10,11 @@ import SwiftUI
 class ContentViewModel: ObservableObject {
     @Published var bestScore: Int = 30000
     @Published var gemPoint: Int = 3000
+    @Published var viewState: ViewMode = .main
+
 }
 
+
+enum ViewMode {
+    case main, play, result
+}
