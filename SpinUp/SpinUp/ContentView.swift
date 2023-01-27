@@ -83,7 +83,7 @@ extension ContentView {
             Spacer()
             
             Button {
-                vm.isShowingShopView.toggle()
+                vm.didTabShopbutton()
             } label: {
                 Text("Shop")
                     .font(.custom("WallPoet", size: 20, relativeTo: .title3))
