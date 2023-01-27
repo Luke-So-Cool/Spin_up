@@ -172,6 +172,6 @@ struct GameOverView: View {
     }
     
     func goToShop() {
-        
+        contentViewModel.didTabShopbutton()
     }
 }

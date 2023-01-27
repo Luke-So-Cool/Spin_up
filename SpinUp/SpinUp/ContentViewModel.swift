@@ -44,6 +44,9 @@ class ContentViewModel: ObservableObject {
         viewState = .main
     }
     
+    func didTabShopbutton() {
+        isShowingShopView.toggle()
+    }
 
 }
 extension ContentViewModel {
