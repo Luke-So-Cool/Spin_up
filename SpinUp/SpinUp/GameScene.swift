@@ -76,7 +76,7 @@ class GameScene: SKScene { //An object that organizes all of the active SpriteKi
     }
     
     func decelerateFidget() {
-        testNode.physicsBody?.angularVelocity -= 0.05
+        testNode.physicsBody?.angularVelocity -= gameManager.currentSpinner.decelerationRatio
         if testNode.physicsBody!.angularVelocity < 0.3 {
             stopFidget()
         }
@@ -91,7 +91,8 @@ class GameScene: SKScene { //An object that organizes all of the active SpriteKi
     
     func spinFidget(velocity: CGPoint) {
         if isSpinning == false {
-            let testAnimation = SKAction.sequence([SKAction.applyAngularImpulse(velocity.x / 1000, duration: 0.1)])
+            let power = gameManager.currentSpinner.power
+            let testAnimation = SKAction.sequence([SKAction.applyAngularImpulse(velocity.x / ( 1000 * power ), duration: 0.1)])
             testNode.run(testAnimation)
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                 self.isSpinning = true

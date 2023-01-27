@@ -73,4 +73,20 @@ struct Spinner: Identifiable {
     var assetString: String {
         return "SPN\(id)"
     }
+    
+    var decelerationRatio: CGFloat {
+        switch id {
+        case 0:
+            return 0.10
+        case 1:
+            return 0.08
+        case 2:
+            return 0.05
+        case 3:
+            return 0.06
+        default:
+            return 0.10
+        }
+    }
+
 }

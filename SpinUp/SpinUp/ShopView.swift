@@ -88,11 +88,8 @@ struct ShopView: View {
                 .frame(height: 100)
                 .padding(20)
                 
-                
                 //Rectangle 41
                 ZStack {
-                    
-                    
                     RoundedRectangle(cornerRadius: 53)
                         .strokeBorder(Color(#colorLiteral(red: 0.9803921580314636, green: 0.9960784316062927, blue: 0.9921568632125854, alpha: 1)), lineWidth: 1)
                         .shadow(color: Color("SpinnerCyan"), radius: 10)
@@ -135,18 +132,6 @@ struct ActivityRingView: View {
                     ),
                     style: StrokeStyle(lineWidth: 5, lineCap: .round)
             ).rotationEffect(.degrees(-90))
-            
-            Circle() //끄트머리 공
-                .frame(width: 5, height: 5)
-                .foregroundColor(Color.spinnerLabel)
-                .offset(y: -50)
-            
-            Circle()
-                .frame(width: 5, height: 5)
-                .foregroundColor(progress > 0.95 ? Color.red: Color.red.opacity(0))
-                .offset(y: -120)
-                .rotationEffect(Angle.degrees(360 * Double(progress)))
-                .shadow(color: progress > 0.96 ? Color.black.opacity(0.1): Color.clear, radius: 3, x: 4, y: 0)
         }
         .frame(idealWidth: 96, idealHeight: 96, alignment: .center)
     }

@@ -20,6 +20,7 @@ class ShopViewModel: ObservableObject {
     
     
     init() {
+        //MARK: - 현재 HGRID 인덱스에 따라 스피너 종류 변경
         $activePageIndex
             .removeDuplicates()
             .map { index in
@@ -28,6 +29,7 @@ class ShopViewModel: ObservableObject {
             .assign(to: \.currentSpinner, on: self)
             .store(in: &cancellables)
         
+        //MARK: - 스피너 종류가 변경되면, 게임매니저, 스피드, 파워, 매스 값 변경
         $currentSpinner
             .sink { receivedValue in
                 self.gameManager.currentSpinner = receivedValue
