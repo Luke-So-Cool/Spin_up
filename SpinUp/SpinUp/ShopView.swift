@@ -10,15 +10,19 @@ import PagingView
 
 
 struct ShopView: View {
-    @State private var activePageIndex: Int = 0
+    let gameManager = GameManager.shared
+    @StateObject var vm = ShopViewModel()
     let itemWidth: CGFloat = 180
     let itemPadding: CGFloat = 60
-    @State var speed: CGFloat = 0.4
     
-    var mockSpinner: [String] = [
-        "blue",
-        "orange",
-        "green"
+    @State var speed: CGFloat = 0.4
+    @State var currentSpinner = Spinner(id: 0)
+    
+    var spinners: [Spinner] = [
+        Spinner(id: 0),
+        Spinner(id: 1),
+        Spinner(id: 2),
+        Spinner(id: 3),
     ]
     
     //MARK: - Body
@@ -33,39 +37,39 @@ struct ShopView: View {
                 
                 //MARK: - 피젯스피너 H 그리드
                 GeometryReader { geometry in
-                        AdaptivePagingScrollView(currentPageIndex: self.$activePageIndex,
+                    AdaptivePagingScrollView(currentPageIndex: self.$vm.activePageIndex,
                                                  itemsAmount: 4,
                                                  itemWidth: self.itemWidth,
                                                  itemPadding: self.itemPadding,
                                                  pageWidth: geometry.size.width) {
-                            ForEach(0..<5) { id in
+                            ForEach(0..<4) { id in
                                 GeometryReader { screen in
-                                    Circle()
-                                        .fill(.blue)
-                                        .rotation3DEffect(Angle(degrees: (Double(screen.frame(in: .global).minX) - 20) / -15),
+                                    Image("SPN\(id)")
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .rotation3DEffect(Angle(degrees: (Double(screen.frame(in: .global).minX) - 20) / -2),
                                                           axis: (x: 0, y: 0, z: 90))
-                                    
-                                        .scaleEffect(activePageIndex == id ?? 0 ? 1.5 : 1)
+                                        .scaleEffect(vm.activePageIndex == id ?? 0 ? 1.5 : 1)
                                 }
                                 .frame(width: self.itemWidth, height: 400)
                             }
                         }
                 }
                 
-                Text("NAME")
+                Text("\(vm.currentSpinner.name)")
                     .foregroundColor(.spinnerLabel)
                     .font(.custom("WallPoet", size: 32))
                 
                 HStack(spacing: 20) {
                     ZStack {
-                        ActivityRingView(progress: $speed)
+                        ActivityRingView(progress: $vm.speed)
                             .animation(.spring(response: 0.6, dampingFraction: 1.0, blendDuration: 1.0))
                         Text("SPEED")
                             .foregroundColor(.spinnerLabel)
                             .font(.subheadline)
                     }
                     ZStack {
-                        ActivityRingView(progress: $speed)
+                        ActivityRingView(progress: $vm.power)
                             .animation(.spring(response: 0.6, dampingFraction: 1.0, blendDuration: 1.0))
                         Text("POWER")
                             .foregroundColor(.spinnerLabel)
@@ -73,7 +77,7 @@ struct ShopView: View {
                             
                     }
                     ZStack {
-                        ActivityRingView(progress: $speed)
+                        ActivityRingView(progress: $vm.mass)
                             .animation(.spring(response: 0.6, dampingFraction: 1.0, blendDuration: 1.0))
                         Text("MASS")
                             .foregroundColor(.spinnerLabel)
@@ -87,15 +91,20 @@ struct ShopView: View {
                 
                 //Rectangle 41
                 ZStack {
-                    Text("")
+                    
                     
                     RoundedRectangle(cornerRadius: 53)
                         .strokeBorder(Color(#colorLiteral(red: 0.9803921580314636, green: 0.9960784316062927, blue: 0.9921568632125854, alpha: 1)), lineWidth: 1)
                         .shadow(color: Color("SpinnerCyan"), radius: 10)
+                    
+                    Text("스피너 변경하기")
+                        .foregroundColor(.spinnerLabel)
                 }
                 .frame(width: 330, height: 52)
-                
-                
+                .onTapGesture {
+                    gameManager.currentSpinnerID = vm.activePageIndex
+                    print("DEBUG: - 스피너 변경요청 ID- \(vm.activePageIndex)")
+                }
                 
                 Spacer()
                     .frame(height: 60)
@@ -112,9 +121,10 @@ struct ActivityRingView: View {
     
     var body: some View {
         ZStack {
-            Circle()
+            Circle() // 배경
                 .stroke(Color.spinnerLabel2, lineWidth: 5)
-            Circle()
+            
+            Circle() // 메인
                 .trim(from: 0, to: progress)
                 .stroke(
                     AngularGradient(
@@ -125,10 +135,12 @@ struct ActivityRingView: View {
                     ),
                     style: StrokeStyle(lineWidth: 5, lineCap: .round)
             ).rotationEffect(.degrees(-90))
-            Circle()
+            
+            Circle() //끄트머리 공
                 .frame(width: 5, height: 5)
                 .foregroundColor(Color.spinnerLabel)
                 .offset(y: -50)
+            
             Circle()
                 .frame(width: 5, height: 5)
                 .foregroundColor(progress > 0.95 ? Color.red: Color.red.opacity(0))

@@ -24,7 +24,7 @@ class GameManager: ObservableObject {
         }
     }
     
-
+    @Published var currentSpinnerID: Int = 0
     @Published var velocity: Double = 0
     
 
