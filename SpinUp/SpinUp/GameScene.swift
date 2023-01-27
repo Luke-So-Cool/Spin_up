@@ -15,6 +15,7 @@ class GameScene: SKScene { //An object that organizes all of the active SpriteKi
     private let testNode = SpinnerNode()
     private var gestureRecognizer: UIPanGestureRecognizer?
     private var isSpinning: Bool = false
+    private var spinnerID: Int = 0
     
 
     //MARK: - Initializer
@@ -34,7 +35,9 @@ class GameScene: SKScene { //An object that organizes all of the active SpriteKi
         physicsWorld.gravity = CGVector(dx: 0, dy: 0)
         //        velocityDelegate?.velocityChanged(velocity: Double(testNode.physicsBody!.angularVelocity))
         
-        print(testNode.physicsBody?.angularVelocity)
+        if gameManager.currentSpinnerID != spinnerID {
+            changeFidget(id: gameManager.currentSpinnerID)
+        }
         if testNode.physicsBody?.angularVelocity ?? 5 < 10 && isSpinning == true && gameManager.state == .running {
             stopFidget()
         }
@@ -92,6 +95,12 @@ class GameScene: SKScene { //An object that organizes all of the active SpriteKi
             
             print("DEBUG: 회전중...")
         }
+    }
+    
+    func changeFidget(id: Int) {
+        testNode.texture = SKTexture(imageNamed: "SPN\(id)")
+        self.spinnerID = id
+        print("DEBUG: 스피너 변경됨 ID - \(id)")
     }
 }
 

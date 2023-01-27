@@ -10,6 +10,8 @@ import PagingView
 
 
 struct ShopView: View {
+    let gameManager = GameManager.shared
+    
     @State private var activePageIndex: Int = 0
     let itemWidth: CGFloat = 180
     let itemPadding: CGFloat = 60
@@ -87,15 +89,20 @@ struct ShopView: View {
                 
                 //Rectangle 41
                 ZStack {
-                    Text("")
+                    
                     
                     RoundedRectangle(cornerRadius: 53)
                         .strokeBorder(Color(#colorLiteral(red: 0.9803921580314636, green: 0.9960784316062927, blue: 0.9921568632125854, alpha: 1)), lineWidth: 1)
                         .shadow(color: Color("SpinnerCyan"), radius: 10)
+                    
+                    Text("스피너 변경하기")
+                        .foregroundColor(.spinnerLabel)
                 }
                 .frame(width: 330, height: 52)
-                
-                
+                .onTapGesture {
+                    gameManager.currentSpinnerID = activePageIndex
+                    print("DEBUG: - 스피너 변경요청 ID- \(activePageIndex)")
+                }
                 
                 Spacer()
                     .frame(height: 60)
