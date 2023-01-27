@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct GameOverView: View {
-    @StateObject var vm = GameOverViewModel()
+    @StateObject private var vm = GameOverViewModel()
+    @ObservedObject var contentViewModel: ContentViewModel
+    
     
     var body: some View {
         ZStack {
@@ -162,7 +164,7 @@ struct GameOverView: View {
     }
     
     func goToHome() {
-        
+        contentViewModel.backHome()
     }
     
     func resume() {
@@ -171,11 +173,5 @@ struct GameOverView: View {
     
     func goToShop() {
         
-    }
-}
-
-struct GameOverView_Previews: PreviewProvider {
-    static var previews: some View {
-        GameOverView()
     }
 }

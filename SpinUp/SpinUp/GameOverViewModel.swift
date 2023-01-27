@@ -5,14 +5,15 @@
 //  Created by GOngTAE on 2022/11/03.
 //
 
-import Foundation
+import SwiftUI
 
-class GameOverViewModel: ObservableObject {
+final class GameOverViewModel: ObservableObject {
     @Published var score: Int = 25072
     @Published var bestScore: Int = 22725321
     @Published var time: Int = 26
     @Published var highSpeed: Int = 153
     
+
     var gameManager = GameManager.shared
     
 }
