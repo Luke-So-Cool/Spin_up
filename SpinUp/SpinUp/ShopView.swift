@@ -38,13 +38,13 @@ struct ShopView: View {
                                                  itemWidth: self.itemWidth,
                                                  itemPadding: self.itemPadding,
                                                  pageWidth: geometry.size.width) {
-                            ForEach(0..<5) { id in
+                            ForEach(0..<4) { id in
                                 GeometryReader { screen in
-                                    Circle()
-                                        .fill(.blue)
-                                        .rotation3DEffect(Angle(degrees: (Double(screen.frame(in: .global).minX) - 20) / -15),
+                                    Image("SPN\(id)")
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .rotation3DEffect(Angle(degrees: (Double(screen.frame(in: .global).minX) - 20) / -2),
                                                           axis: (x: 0, y: 0, z: 90))
-                                    
                                         .scaleEffect(activePageIndex == id ?? 0 ? 1.5 : 1)
                                 }
                                 .frame(width: self.itemWidth, height: 400)
