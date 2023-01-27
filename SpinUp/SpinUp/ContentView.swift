@@ -27,9 +27,6 @@ struct ContentView: View {
             switch viewState {
             case .main:
                 VStack(spacing: 0) {
-                    Text("\(gameManager.state.rawValue)")
-                        .font(.title.bold())
-                        .foregroundColor(.black)
                     navigationBarView
                     bestScore
                     Spacer()
@@ -42,6 +39,9 @@ struct ContentView: View {
             case .play:
                 
                 VStack(alignment: .leading ,spacing: 0) {
+                    Text("\(gameManager.state.rawValue)")
+                        .font(.title.bold())
+                        .foregroundColor(.black)
                     playScoreView
                     playSpeedView
                     Spacer()
@@ -141,10 +141,12 @@ extension ContentView {
                     .font(.custom("WallPoet", size: 32, relativeTo: .largeTitle))
                     .foregroundColor(.spinnerLabel)
             }
+            Spacer()
         }
         .padding(.horizontal, 24)
         .background(Color("BackgroundColor2"))
         .clipShape(RoundedRectangle(cornerRadius: 26))
+        .padding(.horizontal, 48)
     }
     
     var spinButton: some View {
