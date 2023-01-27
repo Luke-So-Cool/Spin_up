@@ -26,7 +26,7 @@ class ContentViewModel: ObservableObject {
     //어떤 역할로 쓸까? -> 일단 가져가서 사용되어야할텐데...
     func didTabSpinButton() {
         viewState = .play
-        GameManager.shared.state = .running
+        gameManager.startGame()
 
     }
     

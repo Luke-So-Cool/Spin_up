@@ -6,9 +6,10 @@
 //
 
 import Combine
-import Foundation
+import SwiftUI
 
 class ShopViewModel: ObservableObject {
+    @State var gameManager = GameManager.shared
     
     @Published var activePageIndex: Int = 0
     @Published var speed: CGFloat = 0 
@@ -17,42 +18,41 @@ class ShopViewModel: ObservableObject {
     @Published var currentSpinner = Spinner(id: 0)
     private var cancellables = Set<AnyCancellable>()
     
+    
     init() {
-        $activePageIndex
-            .removeDuplicates()
-            .map { index in
-                let spinner = Spinner(id: index)
-                
-                return spinner.speed
-            }
-            .assign(to: \.speed, on: self)
-            .store(in: &cancellables)
-        
-        $activePageIndex
-            .removeDuplicates()
-            .map { index in
-                let spinner = Spinner(id: index)
-                return spinner.power
-            }
-            .assign(to: \.power, on: self)
-            .store(in: &cancellables)
-
-        
-        $activePageIndex
-            .removeDuplicates()
-            .map { index in
-                let spinner = Spinner(id: index)
-                return spinner.speed
-            }
-            .assign(to: \.mass, on: self)
-            .store(in: &cancellables)
-        
         $activePageIndex
             .removeDuplicates()
             .map { index in
                 Spinner(id: index)
             }
             .assign(to: \.currentSpinner, on: self)
+            .store(in: &cancellables)
+        
+        $currentSpinner
+            .sink { receivedValue in
+                self.gameManager.currentSpinner = receivedValue
+            }
+            .store(in: &cancellables)
+        
+        $currentSpinner
+            .map { spinner in
+                spinner.speed
+            }
+            .assign(to: \.speed, on: self)
+            .store(in: &cancellables)
+        
+        $currentSpinner
+            .map { spinner in
+                spinner.power
+            }
+            .assign(to: \.power, on: self)
+            .store(in: &cancellables)
+        
+        $currentSpinner
+            .map { spinner in
+                spinner.mass
+            }
+            .assign(to: \.mass, on: self)
             .store(in: &cancellables)
     }
 }

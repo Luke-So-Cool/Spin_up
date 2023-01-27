@@ -102,7 +102,7 @@ struct ShopView: View {
                 }
                 .frame(width: 330, height: 52)
                 .onTapGesture {
-                    gameManager.currentSpinnerID = vm.activePageIndex
+                    gameManager.currentSpinner.id = vm.activePageIndex
                     print("DEBUG: - 스피너 변경요청 ID- \(vm.activePageIndex)")
                 }
                 

@@ -36,8 +36,8 @@ class GameScene: SKScene { //An object that organizes all of the active SpriteKi
         //        velocityDelegate?.velocityChanged(velocity: Double(testNode.physicsBody!.angularVelocity))
         
 
-        if gameManager.currentSpinnerID != spinnerID {
-            changeFidget(id: gameManager.currentSpinnerID)
+        if gameManager.currentSpinner.id != spinnerID {
+            changeFidget(id: gameManager.currentSpinner.id)
         }
         if testNode.physicsBody?.angularVelocity ?? 5 < 10 && isSpinning == true && gameManager.state == .running {
             stopFidget()
@@ -75,15 +75,18 @@ class GameScene: SKScene { //An object that organizes all of the active SpriteKi
         }
     }
     
-    func stopFidget() {
-        print("DEBUG: 피젯 감속")
+    func decelerateFidget() {
         testNode.physicsBody?.angularVelocity -= 0.05
         if testNode.physicsBody!.angularVelocity < 0.3 {
+            stopFidget()
+        }
+    }
+    
+    func stopFidget() {
             testNode.physicsBody?.angularVelocity = 0
             isSpinning = false
             print("DEBUG: 피젯 정지")
-            gameManager.state = .stop
-        }
+            gameManager.stopGame()
     }
     
     func spinFidget(velocity: CGPoint) {
