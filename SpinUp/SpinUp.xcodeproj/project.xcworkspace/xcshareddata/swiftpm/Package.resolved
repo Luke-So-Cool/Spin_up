@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "pagingview",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ericlewis/PagingView.git",
+      "state" : {
+        "revision" : "2282f6aea2d7c701687caac627547b01b3be1309",
+        "version" : "0.1.1"
+      }
+    }
+  ],
+  "version" : 2
+}
