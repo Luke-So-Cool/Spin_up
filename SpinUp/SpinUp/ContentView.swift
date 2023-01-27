@@ -57,7 +57,7 @@ struct ContentView: View {
                 .padding(.horizontal, 24)
                 .zIndex(2)
 
-                GameOverView()
+                GameOverView(contentViewModel: vm)
                     .zIndex(3)
             }
         }

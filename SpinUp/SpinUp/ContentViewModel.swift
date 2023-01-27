@@ -40,6 +40,10 @@ class ContentViewModel: ObservableObject {
             }
             .store(in: &cancellables)
     }
+    func backHome() {
+        viewState = .main
+    }
+    
 
 }
 extension ContentViewModel {
