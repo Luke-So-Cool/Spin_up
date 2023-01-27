@@ -13,12 +13,12 @@ extension Color {
         Color("SpinnerGreen")
     }
     static var spinnerSecondary: Color {
-        Color("SpinnerGreen")
+        Color("SpinnerGreen2")
     }
-    static var background: Color {
+    static var backgroundBlack: Color {
         Color("BackgroundColor")
     }
-    static var background2: Color {
+    static var backgroundBlack2: Color {
         Color("BackgroundColor2")
     }
     static var spinnerLabel: Color {
