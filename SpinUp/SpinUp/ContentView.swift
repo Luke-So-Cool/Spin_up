@@ -9,83 +9,115 @@ import SwiftUI
 import SpriteKit
 
 
-extension Color {
-    static var spinnerAccent: Color {
-        Color("SpinnerGreen")
-    }
-    static var spinnerSecondary: Color {
-        Color("SpinnerGreen")
-    }
-    static var background: Color {
-        Color("BackgroundColor")
-    }
-    static var background2: Color {
-        Color("BackgroundColor2")
-    }
-    static var spinnerLabel: Color {
-        Color("SpinnerLabel")
-    }
-    static var spinnerLabel2: Color {
-        Color("SpinnerLabel2")
-    }
-    static var spinnerLabel3: Color {
-        Color("SpinnerLabel3")
-    }
+enum ViewMode {
+    case main, play, result
 }
 
-struct FidgetSpinner {
-    var id: String
-    var name: String
-}
-
+//MARK: - ContentView
 struct ContentView: View {
-    @State var velocity: Double = 0
+
     @StateObject var gameManager = GameManager.shared
+    @State var viewState: ViewMode = .main
     
     var body: some View {
         ZStack {
             gameView
                 .zIndex(1)
-            
-            VStack {
-                Text("\(gameManager.state.rawValue)")
-                    .font(.title.bold())
-                    .foregroundColor(.black)
-                navigationBarView
-                bestScore
-                Spacer()
-                spinButton
-                    .padding(.horizontal, 30)
-                    .padding(.vertical)
+
+            switch viewState {
+            case .main:
+                VStack(spacing: 0) {
+                    Text("\(gameManager.state.rawValue)")
+                        .font(.title.bold())
+                        .foregroundColor(.black)
+                    navigationBarView
+                    bestScore
+                    Spacer()
+                    spinButton
+                        .padding(.horizontal, 30)
+                        .padding(.vertical)
+                }
+                .zIndex(2)
+                
+            case .play:
+                
+                VStack(alignment: .leading ,spacing: 0) {
+                    playScoreView
+                    playSpeedView
+                    Spacer()
+                }
+                .padding(.horizontal, 24)
+                .zIndex(2)
+            case .result:
+                VStack(spacing: 0) {
+                    // TODO: 루크의 게임 오버뷰 연결하기.
+                    Text("\(gameManager.state.rawValue)")
+                        .font(.title.bold())
+                        .foregroundColor(.black)
+                    Spacer()
+                }
+                .zIndex(2)
             }
-            .zIndex(2)
+        }
+    }
+}
+
+//MARK: - play mode views
+extension ContentView {
+    var playScoreView: some View {
+        HStack {
+            Text("SCORE")
+                .fontWeight(.thin)
+                .foregroundColor(.spinnerLabel3)
+            Text("345023")
+                .fontWeight(.bold)
+                .foregroundColor(.white)
+            Spacer()
+        }
+    }
+    var playSpeedView: some View {
+        HStack(alignment: .lastTextBaseline) {
+            ZStack(alignment: .trailing) {
+                Text("000")
+                    .foregroundColor(.spinnerSecondary)
+                    .font(.system(size: 96))
+                // 색을 연하게하고, 그걸 0을 추가하기
+                Text("000")
+                    .foregroundColor(.spinnerAccent)
+                    .font(.system(size: 96))
+
+            }
+            Text("RPM")
+                .foregroundColor(.spinnerAccent)
+
         }
     }
 }
 
 extension ContentView {
-    @ViewBuilder
+
+    //MARK: - main mode views
     var gameView: some View {
         let scene = GameScene()
         scene.scaleMode = .resizeFill
-//        scene.velocityDelegate = self
-        return SpriteView(scene: scene, options: [.allowsTransparency])
+
+        scene.backgroundColor = .clear
+        return SpriteView(scene: scene)
     }
     
-    @ViewBuilder
     var navigationBarView: some View {
         HStack {
             Image("FidgemIcon")
             Text("+3,000")
                 .font(.title3)
                 .foregroundColor(.spinnerAccent)
-
+            
             Spacer()
             
             Text("Shop")
                 .font(.title3)
                 .foregroundColor(.spinnerAccent)
-
+            
         }
         .foregroundColor(.spinnerAccent)
         .padding(.horizontal, 24)
@@ -93,14 +125,13 @@ extension ContentView {
         .padding(.bottom, 60)
     }
     
-    @ViewBuilder
     var bestScore: some View {
         HStack(spacing: 24) {
             Image("FidgemIcon")
             Color.spinnerLabel3
                 .frame(width: 1, height: 32)
                 .padding(.vertical, 22)
-                
+            
             
             VStack(alignment: .leading) {
                 Text("Best Score")
@@ -116,11 +147,10 @@ extension ContentView {
         .clipShape(RoundedRectangle(cornerRadius: 26))
     }
     
-    @ViewBuilder
     var spinButton: some View {
         Button {
-            //            GameManager.shared.state = .running
-            
+            GameManager.shared.state = .running
+            viewState = .play
         } label: {
             
             Text("SPIN")
@@ -138,13 +168,14 @@ extension ContentView {
 
 extension ContentView {
     func velocityChanged(velocity: Double?) {
-        self.velocity = velocity!
+        self.gameManager.velocity = velocity!
     }
 }
 
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
+
+
+struct FidgetSpinner {
+    var id: String
+    var name: String
 }

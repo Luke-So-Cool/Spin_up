@@ -13,6 +13,7 @@ class GameManager: ObservableObject {
     static let shared = GameManager() // 싱글톤 객체
     weak var gameScene: GameScene?
     var lastState: GameState = .stop
+
     @Published var state: GameState = .running {
         willSet {
             lastState = state
@@ -23,6 +24,10 @@ class GameManager: ObservableObject {
         }
     }
     
+
+    @Published var velocity: Double = 0
+    
+
     //MARK: - Initializers
     private init() {}
 
