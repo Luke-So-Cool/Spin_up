@@ -17,9 +17,15 @@ struct ContentView: View {
     
     var body: some View {
         ZStack {
+
+
             gameView
                 .zIndex(1)
                 .background(Color.backgroundBlack)
+            
+            Image("Playbg_orange")
+                .resizable()
+                .clipShape(Rectangle())
 
             switch vm.viewState {
             case .main:
@@ -70,16 +76,16 @@ extension ContentView {
     var gameView: some View {
         let scene = GameScene()
         scene.scaleMode = .resizeFill
-        return SpriteView(scene: scene)
+        return SpriteView(scene: scene, options: [.allowsTransparency])
     }
     
     var navigationBarView: some View {
         HStack {
-            Image("FidgemIcon")
-            Text(String(vm.gemPoint))
-                .font(.custom("WallPoet", size: 20, relativeTo: .title3))
-                .foregroundColor(gameManager.currentSpinner.primaryColor)
-            
+//            Image("FidgemIcon")
+//            Text(String(vm.gemPoint))
+//                .font(.custom("WallPoet", size: 20, relativeTo: .title3))
+//                .foregroundColor(gameManager.currentSpinner.primaryColor)
+//
             Spacer()
             
             Button {

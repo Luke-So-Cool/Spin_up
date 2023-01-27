@@ -48,7 +48,8 @@ class GameScene: SKScene { //An object that organizes all of the active SpriteKi
     override func didMove(to view: SKView) {
         physicsBody = SKPhysicsBody(edgeLoopFrom: frame.inset(by: UIEdgeInsets(top: 0, left: 0, bottom: -100, right: 0)))
         physicsWorld.contactDelegate = self
-//        backgroundColor = .red
+        backgroundColor = .clear
+        
         testNode.position = CGPoint(x: frame.midX, y: frame.midY)
         testNode.texture = SKTexture(imageNamed: "SPN\(gameManager.currentSpinner.id)")
         testNode.physicsBody?.collisionBitMask = 0
