@@ -35,6 +35,7 @@ class GameManager: ObservableObject {
     
     func didStateChange(last: GameState, new: GameState) {
         print("DEBUG: 게임 상태 변경 \(last) -> \(new)")
+        //여기서 실행되어야하는게, 뷰상태 변경해야하네!
     }
 }
 

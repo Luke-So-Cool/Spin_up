@@ -12,14 +12,13 @@ import SpriteKit
 
 //MARK: - ContentView
 struct ContentView: View {
-    @StateObject var vm = ContentViewModel()
-
-    @StateObject var gameManager = GameManager.shared
+    @StateObject private var vm = ContentViewModel()
     
     var body: some View {
         ZStack {
             gameView
                 .zIndex(1)
+                .background(Color.backgroundBlack)
 
             switch vm.viewState {
             case .main:
@@ -36,7 +35,7 @@ struct ContentView: View {
             case .play:
                 
                 VStack(alignment: .leading ,spacing: 0) {
-                    Text("\(gameManager.state.rawValue)")
+                    Text("\(vm.gameManager.state.rawValue)")
                         .font(.title.bold())
                         .foregroundColor(.black)
                     playScoreView
@@ -46,16 +45,24 @@ struct ContentView: View {
                 .padding(.horizontal, 24)
                 .zIndex(2)
             case .result:
-                VStack(spacing: 0) {
-                    // TODO: 루크의 게임 오버뷰 연결하기.
-                    Text("\(gameManager.state.rawValue)")
+                VStack(alignment: .leading ,spacing: 0) {
+                    Text("\(vm.gameManager.state.rawValue)")
                         .font(.title.bold())
                         .foregroundColor(.black)
+                    playScoreView
+                    playSpeedView
                     Spacer()
                 }
+                .padding(.horizontal, 24)
                 .zIndex(2)
+
+                GameOverView()
+                    .zIndex(3)
             }
         }
+        .fullScreenCover(isPresented: $vm.isShowingShopView) {
+            ShopView()
+               }
     }
 }
 //MARK: - main mode views
@@ -77,7 +84,7 @@ extension ContentView {
             Spacer()
             
             Button {
-                
+                vm.isShowingShopView.toggle()
             } label: {
                 Text("Shop")
                     .font(.custom("WallPoet", size: 20, relativeTo: .title3))
@@ -117,8 +124,7 @@ extension ContentView {
     
     var spinButton: some View {
         Button {
-            GameManager.shared.state = .running
-            vm.viewState = .play
+            vm.didTabSpinButton()
         } label: {
             
             Text("SPIN")
@@ -174,7 +180,7 @@ extension ContentView {
 
 extension ContentView {
     func velocityChanged(velocity: Double?) {
-        self.gameManager.velocity = velocity!
+        self.vm.gameManager.velocity = velocity!
     }
 }
 
@@ -185,3 +191,10 @@ struct FidgetSpinner {
     var id: String
     var name: String
 }
+
+
+let formatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        return formatter
+    }()

@@ -34,7 +34,7 @@ class GameScene: SKScene { //An object that organizes all of the active SpriteKi
         physicsWorld.gravity = CGVector(dx: 0, dy: 0)
         //        velocityDelegate?.velocityChanged(velocity: Double(testNode.physicsBody!.angularVelocity))
         
-        print(testNode.physicsBody?.angularVelocity)
+//        print("Speed : ", testNode.physicsBody?.angularVelocity)
         if testNode.physicsBody?.angularVelocity ?? 5 < 10 && isSpinning == true && gameManager.state == .running {
             stopFidget()
         }
