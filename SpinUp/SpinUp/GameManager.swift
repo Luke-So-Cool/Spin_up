@@ -14,7 +14,7 @@ class GameManager: ObservableObject {
     weak var gameScene: GameScene?
     var lastState: GameState = .stop
 
-    @Published var state: GameState = .running {
+    @Published var state: GameState = .stop {
         willSet {
             lastState = state
         }

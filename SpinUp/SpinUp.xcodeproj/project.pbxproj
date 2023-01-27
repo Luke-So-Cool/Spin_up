@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2D0193BD291355E00063B21B /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D0193BC291355E00063B21B /* Color+.swift */; };
+		2D7E720A298390C7006F612D /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7E7209298390C7006F612D /* ContentViewModel.swift */; };
 		C01EA48D291360E600488C0A /* Wallpoet-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C01EA48C291360E600488C0A /* Wallpoet-Regular.ttf */; };
 		C01EA490291363F300488C0A /* GameOverViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01EA48F291363F300488C0A /* GameOverViewModel.swift */; };
 		C031BCF329838694008FCC02 /* ShopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C031BCF229838694008FCC02 /* ShopView.swift */; };
@@ -24,6 +25,7 @@
 
 /* Begin PBXFileReference section */
 		2D0193BC291355E00063B21B /* Color+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+.swift"; sourceTree = "<group>"; };
+		2D7E7209298390C7006F612D /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
 		C01EA48C291360E600488C0A /* Wallpoet-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Wallpoet-Regular.ttf"; sourceTree = "<group>"; };
 		C01EA48E2913614C00488C0A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		C01EA48F291363F300488C0A /* GameOverViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverViewModel.swift; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 				C0F907DA28504736003F3759 /* Nodes */,
 				C0F907C828504308003F3759 /* SpinUpApp.swift */,
 				C0F907CA28504308003F3759 /* ContentView.swift */,
+				2D7E7209298390C7006F612D /* ContentViewModel.swift */,
 				2D0193BC291355E00063B21B /* Color+.swift */,
 				C0F907D828504484003F3759 /* GameManager.swift */,
 				C0F907D62850447C003F3759 /* GameScene.swift */,
@@ -194,6 +197,7 @@
 				C031BCF329838694008FCC02 /* ShopView.swift in Sources */,
 				C0F907DC28504742003F3759 /* SpinnerNode.swift in Sources */,
 				C0F907CB28504308003F3759 /* ContentView.swift in Sources */,
+				2D7E720A298390C7006F612D /* ContentViewModel.swift in Sources */,
 				C01EA490291363F300488C0A /* GameOverViewModel.swift in Sources */,
 				C0ECB2A828F7A7FE00194DDE /* GameOverView.swift in Sources */,
 				C0F907C928504308003F3759 /* SpinUpApp.swift in Sources */,
@@ -332,8 +336,8 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDarkContent;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -362,8 +366,8 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDarkContent;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

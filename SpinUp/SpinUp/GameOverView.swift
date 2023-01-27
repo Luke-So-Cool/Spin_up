@@ -12,7 +12,7 @@ struct GameOverView: View {
     
     var body: some View {
         ZStack {
-            Color.background.opacity(0.95)
+            Color.backgroundBlack.opacity(0.95)
             
             VStack(spacing: 32) {
                 

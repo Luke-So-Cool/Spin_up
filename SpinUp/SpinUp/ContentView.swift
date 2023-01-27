@@ -15,6 +15,7 @@ enum ViewMode {
 
 //MARK: - ContentView
 struct ContentView: View {
+    @StateObject var vm = ContentViewModel()
 
     @StateObject var gameManager = GameManager.shared
     @State var viewState: ViewMode = .main
@@ -27,9 +28,6 @@ struct ContentView: View {
             switch viewState {
             case .main:
                 VStack(spacing: 0) {
-                    Text("\(gameManager.state.rawValue)")
-                        .font(.title.bold())
-                        .foregroundColor(.black)
                     navigationBarView
                     bestScore
                     Spacer()
@@ -42,6 +40,9 @@ struct ContentView: View {
             case .play:
                 
                 VStack(alignment: .leading ,spacing: 0) {
+                    Text("\(gameManager.state.rawValue)")
+                        .font(.title.bold())
+                        .foregroundColor(.black)
                     playScoreView
                     playSpeedView
                     Spacer()
@@ -61,62 +62,31 @@ struct ContentView: View {
         }
     }
 }
-
-//MARK: - play mode views
-extension ContentView {
-    var playScoreView: some View {
-        HStack {
-            Text("SCORE")
-                .fontWeight(.thin)
-                .foregroundColor(.spinnerLabel3)
-            Text("345023")
-                .fontWeight(.bold)
-                .foregroundColor(.white)
-            Spacer()
-        }
-    }
-    var playSpeedView: some View {
-        HStack(alignment: .lastTextBaseline) {
-            ZStack(alignment: .trailing) {
-                Text("000")
-                    .foregroundColor(.spinnerSecondary)
-                    .font(.system(size: 96))
-                // 색을 연하게하고, 그걸 0을 추가하기
-                Text("000")
-                    .foregroundColor(.spinnerAccent)
-                    .font(.system(size: 96))
-
-            }
-            Text("RPM")
-                .foregroundColor(.spinnerAccent)
-
-        }
-    }
-}
-
+//MARK: - main mode views
 extension ContentView {
 
-    //MARK: - main mode views
     var gameView: some View {
         let scene = GameScene()
         scene.scaleMode = .resizeFill
-
-        scene.backgroundColor = .clear
         return SpriteView(scene: scene)
     }
     
     var navigationBarView: some View {
         HStack {
             Image("FidgemIcon")
-            Text("+3,000")
-                .font(.title3)
+            Text(String(vm.gemPoint))
+                .font(.custom("WallPoet", size: 20, relativeTo: .title3))
                 .foregroundColor(.spinnerAccent)
             
             Spacer()
             
-            Text("Shop")
-                .font(.title3)
-                .foregroundColor(.spinnerAccent)
+            Button {
+                
+            } label: {
+                Text("Shop")
+                    .font(.custom("WallPoet", size: 20, relativeTo: .title3))
+                    .foregroundColor(.spinnerAccent)
+            }
             
         }
         .foregroundColor(.spinnerAccent)
@@ -137,14 +107,16 @@ extension ContentView {
                 Text("Best Score")
                     .font(.footnote)
                     .foregroundColor(.spinnerLabel3)
-                Text("30,000")
-                    .font(.largeTitle)
+                Text(String(vm.bestScore))
+                    .font(.custom("WallPoet", size: 32, relativeTo: .largeTitle))
                     .foregroundColor(.spinnerLabel)
             }
+            Spacer()
         }
         .padding(.horizontal, 24)
         .background(Color("BackgroundColor2"))
         .clipShape(RoundedRectangle(cornerRadius: 26))
+        .padding(.horizontal, 48)
     }
     
     var spinButton: some View {
@@ -155,16 +127,54 @@ extension ContentView {
             
             Text("SPIN")
                 .foregroundColor(.spinnerAccent)
+                .font(.custom("WallPoet", size: 20, relativeTo: .title3))
                 .frame(maxWidth: .infinity)
                 .padding()
                 .overlay(
                     Capsule()
                         .stroke(Color.spinnerAccent, lineWidth: 1)
-                        .shadow(color: Color.spinnerAccent, radius: 10)
+                        .shadow(color: Color.spinnerAccent, radius: 20)
                 )
         }
     }
 }
+
+//MARK: - play mode views
+extension ContentView {
+    var playScoreView: some View {
+        HStack {
+            Text("SCORE")
+                .fontWeight(.thin)
+                .foregroundColor(.spinnerLabel3)
+            Text("345023")
+                .fontWeight(.bold)
+                .foregroundColor(.spinnerLabel)
+            Spacer()
+        }
+    }
+    var playSpeedView: some View {
+        HStack(alignment: .lastTextBaseline) {
+            ZStack(alignment: .trailing) {
+                Text("000")
+                    .font(.custom("WallPoet", size: 96))
+                    .foregroundColor(.spinnerSecondary)
+                    .multilineTextAlignment(.trailing)
+
+                Text("0")
+                    .font(.custom("WallPoet", size: 96))
+                    .foregroundColor(.spinnerAccent)
+                    .multilineTextAlignment(.trailing)
+
+
+            }
+            Text("RPM")
+                .font(.custom("WallPoet", size: 17, relativeTo: .body))
+                .foregroundColor(.spinnerAccent)
+
+        }
+    }
+}
+
 
 extension ContentView {
     func velocityChanged(velocity: Double?) {
