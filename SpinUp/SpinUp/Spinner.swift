@@ -14,13 +14,13 @@ struct Spinner: Identifiable {
     var name: String {
         switch id {
         case 0:
-            return "default"
+            return "ORIGIN"
         case 1:
-            return "blue"
+            return "CYAN"
         case 2:
-            return "green"
+            return "HULK"
         case 3:
-            return "orange"
+            return "FLASH"
         default:
             return "default"
         }

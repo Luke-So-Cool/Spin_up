@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 class GameManager: ObservableObject {
     
@@ -24,6 +25,7 @@ class GameManager: ObservableObject {
         }
     }
     
+    @AppStorage("bestScore") var bestScore: Int = 0
     @Published var currentScore: Int = 0
     @Published var currentSpinner: Spinner = Spinner(id: 0)
     @Published var velocity: Double = 0
@@ -43,7 +45,13 @@ class GameManager: ObservableObject {
         state = .running
     }
     
-    func stopGame() { state = .stop }
+    func stopGame() {
+        if currentScore > bestScore {
+            bestScore = currentScore
+        }
+        
+        state = .stop
+    }
     
     func reset() {
         currentScore = 0

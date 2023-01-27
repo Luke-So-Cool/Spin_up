@@ -10,7 +10,7 @@ import SwiftUI
 struct GameOverView: View {
     @StateObject private var vm = GameOverViewModel()
     @ObservedObject var contentViewModel: ContentViewModel
-    
+    @StateObject var gameManager = GameManager.shared
     
     var body: some View {
         ZStack {
@@ -33,7 +33,7 @@ struct GameOverView: View {
                         .font(.custom("WallPoet", size: 16))
                         .foregroundColor(.white)
                     
-                    Text("\(vm.bestScore)")
+                    Text("\(gameManager.bestScore)")
                         .font(.custom("WallPoet", size: 48))
                         .foregroundColor(.spinnerLabel3)
                 }

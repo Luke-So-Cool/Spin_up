@@ -109,7 +109,7 @@ extension ContentView {
                 Text("Best Score")
                     .font(.footnote)
                     .foregroundColor(.spinnerLabel3)
-                Text(String(vm.bestScore))
+                Text(String(gameManager.bestScore))
                     .font(.custom("WallPoet", size: 32, relativeTo: .largeTitle))
                     .foregroundColor(.spinnerLabel)
             }
