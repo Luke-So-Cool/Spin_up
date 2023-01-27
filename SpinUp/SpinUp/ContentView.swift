@@ -15,6 +15,7 @@ enum ViewMode {
 
 //MARK: - ContentView
 struct ContentView: View {
+    @StateObject var vm = ContentViewModel()
 
     @StateObject var gameManager = GameManager.shared
     @State var viewState: ViewMode = .main
@@ -94,9 +95,9 @@ extension ContentView {
     }
 }
 
+//MARK: - main mode views
 extension ContentView {
 
-    //MARK: - main mode views
     var gameView: some View {
         let scene = GameScene()
         scene.scaleMode = .resizeFill
@@ -108,15 +109,19 @@ extension ContentView {
     var navigationBarView: some View {
         HStack {
             Image("FidgemIcon")
-            Text("+3,000")
+            Text(String(vm.gemPoint))
                 .font(.custom("WallPoet", size: 20, relativeTo: .title3))
                 .foregroundColor(.spinnerAccent)
             
             Spacer()
             
-            Text("Shop")
-                .font(.custom("WallPoet", size: 20, relativeTo: .title3))
-                .foregroundColor(.spinnerAccent)
+            Button {
+                
+            } label: {
+                Text("Shop")
+                    .font(.custom("WallPoet", size: 20, relativeTo: .title3))
+                    .foregroundColor(.spinnerAccent)
+            }
             
         }
         .foregroundColor(.spinnerAccent)
@@ -137,7 +142,7 @@ extension ContentView {
                 Text("Best Score")
                     .font(.footnote)
                     .foregroundColor(.spinnerLabel3)
-                Text("30,000")
+                Text(String(vm.bestScore))
                     .font(.custom("WallPoet", size: 32, relativeTo: .largeTitle))
                     .foregroundColor(.spinnerLabel)
             }
