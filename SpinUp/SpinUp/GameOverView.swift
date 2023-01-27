@@ -8,116 +8,151 @@
 import SwiftUI
 
 struct GameOverView: View {
+    @StateObject var vm = GameOverViewModel()
+    
     var body: some View {
-        VStack(spacing: 32) {
+        ZStack {
+            Color.background.opacity(0.95)
             
-            Spacer()
-            
-            
-            VStack(spacing: 17) {
-                Text("Score")
+            VStack(spacing: 32) {
                 
-                Text("25,072")
-                    .font(.system(size: 48, weight: .bold))
-            }
-            
-            VStack(spacing: 17) {
-                Text("Best")
+                Spacer()
                 
-                Text("22,725,321")
-                    .font(.system(size: 48, weight: .bold))
-            }
-            
-            
-            HStack {
-                VStack {
-                    Text("TIME")
+                VStack(spacing: 8) {
+                    Text("Score")
+                        .font(.custom("WallPoet", size: 16))
                     
-                    Text("26 sec")
-                        
+                    Text("\(vm.score)")
+                        .font(.custom("WallPoet", size: 48))
                 }
                 
-                Divider()
-                    .background(.black)
-                    .frame(width: 20)
-                    .padding(10)
+                VStack(spacing: 8) {
+                    Text("Best")
+                        .font(.custom("WallPoet", size: 16))
+                        .foregroundColor(.white)
                     
-                
-                VStack {
-                    Text("HIGH SPEED")
-                    
-                    Text("153mph")
-                        
+                    Text("\(vm.bestScore)")
+                        .font(.custom("WallPoet", size: 48))
+                        .foregroundColor(.spinnerLabel3)
                 }
-            }
-            .padding(.horizontal, 44)
-            .frame(height: 75)
-            .overlay(
-                RoundedRectangle(cornerRadius: 8)
-                    .stroke(lineWidth: 1)
-            )
-            
-            Spacer()
-            
-            VStack {
+                
                 HStack {
-                    Image(systemName: "")
-                    
-                    Text("광고 보고")
-                    Text("이어하기")
-                        .font(.body.bold())
-                }
-            }
-            .padding(10)
-            .overlay(
-                Capsule()
-                    .stroke(lineWidth: 1)
-                    .shadow(radius: 4)
-            )
-            .onTapGesture {
-                resumeWithAD()
-            }
-            
-            HStack(spacing: 24) {
-                Image(systemName: "house")
-                    .font(.largeTitle)
-                    .frame(width: 72, height: 72)
-                    .overlay(
-                        Circle()
-                            .stroke(lineWidth: 2)
-                            .shadow(radius: 4)
-                    )
-                    .onTapGesture {
-                        goToHome()
+                    VStack(spacing: 2) {
+                        Text("TIME")
+                            .font(.caption)
+                            .foregroundColor(.spinnerLabel3)
+                        
+                        Text("\(vm.time) sec")
+                            .font(.body.bold())
+                            
                     }
+                    
+                    Divider()
+                        .background(.white)
+                        .frame(width: 20)
+                        .padding(10)
+                    
+                    VStack(spacing: 2) {
+                        Text("HIGH SPEED")
+                            .font(.caption)
+                            .foregroundColor(.spinnerLabel3)
+                        
+                        Text("\(vm.highSpeed)mph")
+                            .font(.body.bold())
+                    }
+                }
+                .padding(.horizontal, 44)
+                .frame(height: 75)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 8)
+                        .stroke(lineWidth: 1)
+                        .foregroundColor(.spinnerLabel2)
+                )
                 
-                Image(systemName: "play")
-                    .font(.largeTitle)
-                    .frame(width: 100, height: 100)
-                    .overlay(
+                Spacer()
+                
+                ZStack {
+                    
+                    Capsule()
+                        .stroke(lineWidth: 2)
+                        .frame(height: 44)
+                        .shadow(color: Color("SpinnerAd"), radius: 6)
+                        .padding(.horizontal, 60)
+                        
+                    
+                    VStack {
+                        HStack {
+                            
+                            Image(systemName: "film")
+                                .font(.subheadline.bold())
+                            
+                            Text("광고 보고")
+                                .font(.subheadline.bold())
+                            Text("이어하기")
+                                .font(.subheadline.bold())
+                            
+                        }
+                        .padding(.horizontal, 10)
+                    }
+                    .padding(10)
+                }
+                .foregroundColor(Color("SpinnerAd"))
+                .onTapGesture {
+                    resumeWithAD()
+                }
+                
+                HStack(spacing: 24) {
+                    ZStack {
                         Circle()
                             .stroke(lineWidth: 2)
-                            .shadow(radius: 4)
-                    )
+                            .shadow(color: .spinnerLabel ,radius: 6)
+                            
+                            
+                        Image(systemName: "house")
+                            .font(.largeTitle)
+                            
+                            .onTapGesture {
+                                goToHome()
+                        }
+                    }
+                    .frame(width: 72, height: 72)
+                    
+                    ZStack {
+                        Circle()
+                            .stroke(lineWidth: 2)
+                            .shadow(color: .spinnerLabel ,radius: 6)
+                        
+                        Image(systemName: "play")
+                            .font(.largeTitle)
+                    }
+                    .frame(width: 100, height: 100)
                     .onTapGesture {
                         resume()
                     }
-                
-                Image(systemName: "cart")
-                    .font(.largeTitle)
-                    .frame(width: 72, height: 72)
-                    .overlay(
+                    
+                    ZStack {
                         Circle()
                             .stroke(lineWidth: 2)
-                            .shadow(radius: 4)
-                    )
-                    .onTapGesture {
-                        goToShop()
+                            .shadow(color: .spinnerLabel ,radius: 6)
+                        
+                        Image(systemName: "cart")
+                            .font(.largeTitle)
+                            .onTapGesture {
+                                goToShop()
+                        }
                     }
-                    
+                    .frame(width: 72, height: 72)
+                        
+                }
+                .padding(.bottom, 40)
             }
+            .padding(20)
+            
+            .foregroundColor(.spinnerLabel)
+            
         }
-        .padding(.horizontal, 20)
+        .ignoresSafeArea()
+        
     }
     
     //MARK: - Helpers
