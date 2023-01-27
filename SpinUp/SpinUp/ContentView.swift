@@ -109,13 +109,13 @@ extension ContentView {
         HStack {
             Image("FidgemIcon")
             Text("+3,000")
-                .font(.title3)
+                .font(.custom("WallPoet", size: 20, relativeTo: .title3))
                 .foregroundColor(.spinnerAccent)
             
             Spacer()
             
             Text("Shop")
-                .font(.title3)
+                .font(.custom("WallPoet", size: 20, relativeTo: .title3))
                 .foregroundColor(.spinnerAccent)
             
         }
@@ -138,7 +138,7 @@ extension ContentView {
                     .font(.footnote)
                     .foregroundColor(.spinnerLabel3)
                 Text("30,000")
-                    .font(.largeTitle)
+                    .font(.custom("WallPoet", size: 32, relativeTo: .largeTitle))
                     .foregroundColor(.spinnerLabel)
             }
         }
@@ -155,6 +155,7 @@ extension ContentView {
             
             Text("SPIN")
                 .foregroundColor(.spinnerAccent)
+                .font(.custom("WallPoet", size: 20, relativeTo: .title3))
                 .frame(maxWidth: .infinity)
                 .padding()
                 .overlay(
