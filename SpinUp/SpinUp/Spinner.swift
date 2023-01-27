@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 struct Spinner: Identifiable {
     var id: Int
@@ -22,6 +23,34 @@ struct Spinner: Identifiable {
             return "orange"
         default:
             return "default"
+        }
+    }
+    var primaryColor: Color {
+        switch id {
+        case 0:
+            return Color("SpinnerLabel")
+        case 1:
+            return Color("SpinnerCyan")
+        case 2:
+            return Color("SpinnerGreen")
+        case 3:
+            return Color("SpinnerOrange")
+        default:
+            return Color("SpinnerCyan")
+        }
+    }
+    var secondaryColor: Color {
+        switch id {
+        case 0:
+            return Color("SpinnerCyan2")
+        case 1:
+            return Color("SpinnerCyan2")
+        case 2:
+            return Color("SpinnerGreen2")
+        case 3:
+            return Color("SpinnerOrange2")
+        default:
+            return Color("SpinnerCyan2")
         }
     }
     

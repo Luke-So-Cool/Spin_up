@@ -36,14 +36,12 @@ struct ContentView: View {
             case .play:
                 
                 VStack(alignment: .leading ,spacing: 0) {
-                    Text("\(vm.gameManager.state.rawValue)")
-                        .font(.title.bold())
-                        .foregroundColor(.black)
                     playScoreView
                     playSpeedView
                     Spacer()
                 }
                 .padding(.horizontal, 24)
+                .padding(.top, 36)
                 .zIndex(2)
             case .result:
                 VStack(alignment: .leading ,spacing: 0) {
@@ -80,7 +78,7 @@ extension ContentView {
             Image("FidgemIcon")
             Text(String(vm.gemPoint))
                 .font(.custom("WallPoet", size: 20, relativeTo: .title3))
-                .foregroundColor(.spinnerAccent)
+                .foregroundColor(gameManager.currentSpinner.primaryColor)
             
             Spacer()
             
@@ -89,11 +87,11 @@ extension ContentView {
             } label: {
                 Text("Shop")
                     .font(.custom("WallPoet", size: 20, relativeTo: .title3))
-                    .foregroundColor(.spinnerAccent)
+                    .foregroundColor(gameManager.currentSpinner.primaryColor)
             }
             
         }
-        .foregroundColor(.spinnerAccent)
+        .foregroundColor(gameManager.currentSpinner.primaryColor)
         .padding(.horizontal, 24)
         .padding(.top, 30)
         .padding(.bottom, 60)
@@ -129,14 +127,14 @@ extension ContentView {
         } label: {
             
             Text("SPIN")
-                .foregroundColor(.spinnerAccent)
+                .foregroundColor(gameManager.currentSpinner.primaryColor)
                 .font(.custom("WallPoet", size: 20, relativeTo: .title3))
                 .frame(maxWidth: .infinity)
                 .padding()
                 .overlay(
                     Capsule()
-                        .stroke(Color.spinnerAccent, lineWidth: 1)
-                        .shadow(color: Color.spinnerAccent, radius: 20)
+                        .stroke(gameManager.currentSpinner.primaryColor, lineWidth: 1)
+                        .shadow(color: gameManager.currentSpinner.primaryColor, radius: 10)
                 )
         }
     }
@@ -165,14 +163,14 @@ extension ContentView {
 
                 Text("\(Int(gameManager.velocity))")
                     .font(.custom("WallPoet", size: 96))
-                    .foregroundColor(.spinnerAccent)
+                    .foregroundColor(gameManager.currentSpinner.primaryColor)
                     .multilineTextAlignment(.trailing)
 
 
             }
             Text("RPM")
                 .font(.custom("WallPoet", size: 17, relativeTo: .body))
-                .foregroundColor(.spinnerAccent)
+                .foregroundColor(gameManager.currentSpinner.primaryColor)
 
         }
     }
@@ -187,11 +185,6 @@ extension ContentView {
 
 
 
-
-struct FidgetSpinner {
-    var id: String
-    var name: String
-}
 
 
 let formatter: NumberFormatter = {
